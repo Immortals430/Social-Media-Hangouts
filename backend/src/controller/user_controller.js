@@ -38,9 +38,8 @@ export const signup = async (req, res) => {
 
         // send confirm link
         const secret = jwt.sign(req.body, jwtSecret, {expiresIn: "15m"})
-        console.log("signingup", req.body.email, secret)
         await sendAccountCreationLink(req.body.email, secret)
-        console.log("sign up completed")
+        
         return res.status(201).json({
             success: true,
             message: "Confirmation link will be sent to your email"
@@ -240,7 +239,7 @@ export const sendOtp = async (req, res) => {
                 await Otp.create({ otp, email })
             }
       
-            sendResetLinkMail(user.email, otp)
+            await sendResetLinkMail(user.email, otp)
             res.status(200).json({
                 success: true,
                 message: "Otp sent to email",

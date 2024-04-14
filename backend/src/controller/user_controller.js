@@ -38,7 +38,9 @@ export const signup = async (req, res) => {
 
         // send confirm link
         const secret = jwt.sign(req.body, jwtSecret, {expiresIn: "15m"})
-        sendAccountCreationLink(req.body.email, secret)
+        console.log("signingup", req.body.email, secret)
+        await sendAccountCreationLink(req.body.email, secret)
+        console.log("sign up completed")
         return res.status(201).json({
             success: true,
             message: "Confirmation link will be sent to your email"

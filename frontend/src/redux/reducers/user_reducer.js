@@ -155,7 +155,7 @@ export const unfriend = createAsyncThunk('user/unfriend', async (args, { dispatc
 
 
 // send otp
-export const sendOtp = createAsyncThunk('user/unfriend', async args => {
+export const sendOtp = createAsyncThunk('user/unfriend', async (args) => {
   try{
     const {data} = await sendOtpAPI(args)
     alert(data.message)

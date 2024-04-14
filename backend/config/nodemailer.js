@@ -1,18 +1,15 @@
 import { createTransport } from "nodemailer"
+import smtp from 'nodemailer-smtp-transport';
 
 
-const transporter = createTransport({
+const transporter = createTransport(smtp({
     "service": process.env.NODEMAILER_SERVICE,
-   
-    "host":  process.env.NODEMAILER_HOST,
-    "port":  process.env.NODEMAILER_PORT,
     "secure":  process.env.NODEMAILER_SECURE,
     "auth": { 
               "user":  process.env.NODEMAILER_USER,
               "pass":  process.env.NODEMAILER_PASS
             }
-    }); 
-
+    }));
 
 export const sendResetLinkMail = async (user, otp) => {
     try{

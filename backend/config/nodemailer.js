@@ -4,7 +4,6 @@ import smtp from 'nodemailer-smtp-transport';
 
 const transporter = createTransport(smtp({
     "service": process.env.NODEMAILER_SERVICE,
-    "secure":  process.env.NODEMAILER_SECURE,
     "auth": { 
               "user":  process.env.NODEMAILER_USER,
               "pass":  process.env.NODEMAILER_PASS

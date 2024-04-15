@@ -16,18 +16,6 @@ import { Otp } from "../model/otp_schema.js";
 // signup
 export const signup = async (req, res) => {
     try{
-        const { link } = req.query
-        if(link){
-            // confirm account creation
-            const { username, email, password} = jwt.verify(link, jwtSecret)
-            const hashPass = await hash(password, 10);
-            await User.create({ username, email, password: hashPass })
-            return res.status(201).json({
-                success: true,
-                message: "User created successfully"
-            })
-        }
-
         const user = await User.findOne({email: req.body.email})
         if(user){
             return res.status(409).json({
@@ -53,6 +41,30 @@ export const signup = async (req, res) => {
             message: "Failed to signup"
         })}
     }
+
+
+// confirm account
+export const confirmAccount = async (req, res) => {
+    const { link } = req.query
+    if(link){
+        // confirm account creation
+        const { username, email, password} = jwt.verify(link, jwtSecret)
+        if(username && email && password){
+            const hashPass = await hash(password, 10);
+            await User.create({ username, email, password: hashPass })
+            return res.status(201).json({
+                success: true,
+                message: "User created successfully"
+            })
+        }else{
+            return res.status(401).json({
+                success: false,
+                message: "token expired"
+            })
+        }
+    }
+}
+
 
 
 // signin

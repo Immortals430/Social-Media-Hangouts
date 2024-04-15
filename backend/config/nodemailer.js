@@ -15,7 +15,7 @@ export const sendResetLinkMail = async (user, otp) => {
         const res = await transporter.sendMail({
             from: process.env.NODEMAILER_USER,
             to: user,
-            subject: 'One-Time Password (OTP) Confirmation',
+            subject: `One-Time Password (OTP) Confirmation for ${user}  ${new Date().toLocaleDateString()}`,
             html: `<h3>${otp}</h3>`
                
         })
@@ -32,13 +32,11 @@ export const sendAccountCreationLink = async (user, link) => {
         const res = await transporter.sendMail({
             from: process.env.NODEMAILER_USER,
             to: user,
-            subject: 'Account confirmation',
+            subject: `Account confirmation for ${user}  ${new Date().toLocaleDateString()}`,
             html: `<html>
             <head>
-            <body>
-                <form action="${process.env.SERVERURL}/api/v1/user/signup/?link=${link}" method="post" >
-                    <p>Click on Link to confirm your account creation <button type="submit">Create Account</button></p>                   
-                </form>
+            <body>        
+                <p>Click on Link to confirm your account creation <a href="${process.env.SERVERURL}/api/v1/user/confirm-account/?link=${link}">Create Account</button></p>                     
             </body>
             </head>
             </html>

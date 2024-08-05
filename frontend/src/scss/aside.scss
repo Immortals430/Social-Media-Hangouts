@@ -1,0 +1,182 @@
+@mixin aside-icons {
+  @include icons;
+  margin-right: 16px;
+  color: white;
+  @include center;
+}
+
+@mixin aside-font {
+  font-size: $font-mid;
+  font-weight: 600;
+  font-family: "Open Sans", sans-serif;
+  color: $grey;
+}
+
+@mixin aside {
+  height: 100vh;
+  padding-top: 96px;
+  width: 280px;
+  position: fixed;
+  top: 0;
+}
+
+@mixin asidesection {
+  padding: 12px 15px;
+  margin: 8px 15px;
+  background-color: $white;
+  border-radius: 15px;
+}
+
+.left-aside {
+  @include aside;
+  left: 0;
+
+  > section {
+    @include asidesection;
+
+    > * {
+      display: flex;
+      align-items: center;
+      margin: 8px 15px;
+    }
+  }
+}
+
+.aside-sec-header {
+  @include aside-font;
+  padding-left: 10px;
+  font-size: $font-sm;
+}
+
+.left-aside span {
+  display: inline-block;
+  @include aside-font;
+}
+
+.aside-main-sec * {
+  cursor: pointer
+}
+
+.aside-main-sec .profile {
+  @include aside-icons;
+  @include background;
+  color: $theme;
+}
+
+.aside-main-sec .home {
+  @include aside-icons;
+  background: linear-gradient(to right, #0575e6, #021b79);
+}
+
+.aside-main-sec .users {
+  @include aside-icons;
+  background: linear-gradient(to right, #e44d26, #f16529);
+}
+
+.aside-main-sec .store {
+  @include aside-icons;
+  background: linear-gradient(to right, #f2994a, #f2c94c);
+}
+
+.aside-main-sec .groups {
+  @include aside-icons;
+  background: linear-gradient(135deg, #05f, #09f);
+}
+
+.aside-author-sec .linkedin {
+  @include aside-icons;
+  color: $theme;
+}
+
+.aside-author-sec .github {
+  @include aside-icons;
+  color: black;
+}
+
+.aside-author-sec a {
+  color: inherit;
+}
+
+aside-author-sec span{
+  cursor: pointer;
+}
+
+.aside-extra-sec .logout{
+  @include aside-icons;
+  color: red
+}
+
+.aside-extra-sec .setting{
+@include icons;
+  margin-right: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: $theme;
+}
+
+.aside-extra-sec *{
+  cursor: pointer;
+}
+
+
+/* aside right */
+
+.right-aside {
+  @include aside;
+  @include fontstyle;
+  width: 260px;
+  right: 2px;
+
+  > div {
+    @include asidesection;
+    height: 97%;
+
+    > section {
+      height: 48%;
+      margin-bottom: 24px;
+
+      > h4 {
+        margin-bottom: 12px;
+      }
+
+      > div {
+        height: calc(100% - 30px);
+        overflow: auto;
+        scrollbar-width: none;
+
+        > div {
+
+          gap: 8px;
+          padding: 8px 0;
+
+
+        }
+        *{
+          display: flex;
+          align-items: center;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
+.online-logo {
+  background-color: #17a750;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.logo {
+  @include icons;
+  width: 35px;
+  height: 35px;
+  @include background;
+}
+
+.name {
+  flex: 1;
+  color: black;
+}

@@ -1,0 +1,46 @@
+$theme: #0055ff;
+$white: #fff;
+$light-grey: #f0f2f5;
+$mid-grey:#bec4ca;
+$grey: #a2a2a2;
+$font-sm: 0.75rem;        /* 12px */
+$font-mid: 0.9rem;        /* 14px */
+$font-lg: 1.5rem;         /* 24px */
+$font-x-lg: 2rem;         /* 32px */
+
+
+@mixin button{
+    width: 110px;
+    height: 50px;
+    color: $white;
+    @include center;
+    border-radius: 5px;
+}
+
+
+@mixin icons{
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+}
+
+
+@mixin center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+@mixin fontstyle{
+    font-size: $font-sm;
+    color: $mid-grey;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+}
+
+@mixin background{
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}

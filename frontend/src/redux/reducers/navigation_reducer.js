@@ -2,10 +2,12 @@ import { createSlice } from "@reduxjs/toolkit";
 
 
 const initialState = {
-    path: "post",
-    loading: ['posts', 'friends'],
-    mobileAside: false
+    path: "",
+    // loading: ['home']
+    // mobileAside: false
 }
+
+
 
 const navigateSlice = createSlice({
     name: 'navigate',
@@ -14,16 +16,16 @@ const navigateSlice = createSlice({
         SET_PATH: (state, action) => {
             state.path = action.payload
         },
-        START_LOADING: (state, action) => {
-            state.loading = [...state.loading, action.payload]
-        },
-        STOP_LOADING: (state, action) => {
-            const index = state.loading.indexOf(action.payload)
-            state.loading.splice(index, 1)
-        },
-        SET_MOBILE_ASIDE: (state, action) => {
-            state.mobileAside = action.payload
-        }
+        // START_LOADING: (state, action) => {
+        //     state.loading = [...state.loading, action.payload]
+        // },
+        // STOP_LOADING: (state, action) => {
+        //     const index = state.loading.indexOf(action.payload)
+        //     state.loading.splice(index, 1)
+        // },
+        // SET_MOBILE_ASIDE: (state, action) => {
+        //     state.mobileAside = action.payload
+        // }
     }
 })
 

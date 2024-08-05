@@ -1,31 +1,42 @@
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import Navbar from './Component/Navbar/Navbar';
-import Homepage from './pages/Homepage/Homepage';
-import { Provider } from 'react-redux';
-import {store} from './redux/store';
-import Profilepage from './pages/Profilepage/Profilepage';
-import "./configs/firebase.js"
-
-
-
+import FindFriend from "./Components/FindFriend/FindFriend";
+import Main from "./Components/Main/Main";
+import Profile from "./Components/Profile/Profile";
+import AuthPage from "./Components/AuthPage/AuthPage";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Homepage from "./Pages/Homepage";
+import { Provider } from "react-redux";
+import { store } from "./redux/store";
+import Settings from "./Components/Settings/Settings";
+import ErrorPage from "./Components/ErrorPage";
+import AccountSettings from "./Components/Settings/SubSettings/AccountSettings";
+import AddressSettings from "./Components/Settings/SubSettings/AddressSettings"
+import PasswordSettings from "./Components/Settings/SubSettings/PasswordSettings";
 
 
 function App() {
 
   const routes = createBrowserRouter([{
-    path: "/", element: <Navbar/>, children: [
-      { index: true, element: <Homepage/> },
-      { path: 'profile', element: <Profilepage /> }
+    path: "/", element: <Homepage/>, children: [
+      { index: true, element:  <Main />},
+      { path: '/auth', element: <AuthPage /> },
+      { path: '/find-friend', element: <FindFriend /> },
+      { path: '/profile/:id', element: <Profile />},
+      { path: "/settings", element: <Settings />},
+      { path: "/settings/account", element: <AccountSettings />},
+      { path: "/settings/address", element: <AddressSettings />},
+      { path: "/settings/password", element: <PasswordSettings />},
+      { path: "*", element: <ErrorPage />}
+
     ]
   }])
-  
-
   return (
-    <Provider store={store}>
-      <RouterProvider router={routes}/>
-    </Provider>
-  )
+    <>
+      <Provider store={store}>
+        <RouterProvider router={routes}/>  
+      </Provider>
 
+    </>
+  );
 }
 
 export default App;

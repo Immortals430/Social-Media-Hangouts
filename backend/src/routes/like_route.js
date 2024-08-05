@@ -4,6 +4,6 @@ import { toggle } from "../controller/like_controller.js"
 
 
 
-likeRouter.get('/toggle/:postId', toggle)
+likeRouter.get('/toggle/:postId', (req, res) => toggle(req, res))
 
 

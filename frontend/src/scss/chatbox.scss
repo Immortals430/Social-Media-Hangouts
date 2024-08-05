@@ -1,0 +1,108 @@
+
+.chats-container {
+  display: flex;
+
+  > * {
+    display: flex;
+  }
+}
+
+.chats-container{
+    position: fixed;
+    background-color: $white;
+    bottom: 2px;
+    width: 290px;
+    height: 400px;
+    right: 260px;
+    flex-flow: column;
+    gap: 20px;
+    box-shadow: 0 4px 10px rgb(216, 216, 216);
+    z-index: 3;
+    @include fontstyle;
+  
+    .msg-head{
+      gap: 10px;
+      padding: 10px;
+      box-shadow: 0 4px 10px rgb(216, 216, 216);
+      align-items: center;
+    }
+    .msg-head-dp{
+      @include icons;
+      @include background;
+      height: 35px;
+      width: 35px;
+      border: 1px solid black;
+    }
+    .msg-head-name{
+      flex: 1;
+      color: $theme;
+    } 
+  }
+  
+  
+  
+  .msg-container{
+    flex: 1;
+    padding: 0 10px 20px 15px;
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 10px;
+    overflow-y: auto;
+    font-weight: 500;
+
+    p{
+      padding: 10px;
+      max-width: 80%;
+      overflow-wrap: break-word;
+
+    }
+  
+    .sent-msg{
+      align-self: flex-end;
+      background-color: rgb($theme, 0.1);
+      color: $theme;
+      border-radius: 10px;
+      border-bottom-right-radius: 0;
+    }
+    
+    .rec-msg{
+      display: inline-block;
+      width: fit-content;
+      background-color: rgb(252,246,238);
+      color: black;
+      border-radius: 10px;
+      border-bottom-left-radius: 0;
+    }
+    
+  }
+  
+  
+  .msg-form {
+    height: 40px;
+    margin-bottom: 15px;
+    > *{
+      height: 100%;
+      border: none;
+    }
+    > button[type="submit"]{
+      width: 40px;
+      @include center;
+      background-color: $light-grey;
+      margin-right: 10px;
+      border-radius: 0 10px 10px 0;
+      cursor: pointer;
+    }
+    > textarea{
+      padding: 10px;
+      margin-left: 10px;
+      margin-bottom: 15px;
+      flex: 1;
+      resize: none;
+      background-color: $light-grey;
+      border-radius: 10px 0 0 10px;
+      outline: none;
+    }
+  }
+  
+  
+

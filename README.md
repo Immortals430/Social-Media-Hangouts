@@ -78,19 +78,19 @@ Socket environment variables
 
 
 <p align="center" >
-<img src="" width="468" height="300" />
+<img src="https://github.com/user-attachments/assets/6e37c71e-77c5-4695-9caf-e5ae789dde9d" width="468" height="300" />
 </p>
 
 <p align="center"> Sign In using Local or Google Auth </p><br><br>
   
 <p align="center">
-<img src="" width="468" height="300" />
+<img src="https://github.com/user-attachments/assets/90850386-cd64-47f5-aae1-55c2356ea588" width="468" height="300" />
 </p>
 
 <p align="center"> Homepage </p><br><br>
 
 <p align="center">
-<img src="" width="468" height="300" />
+<img src="https://github.com/user-attachments/assets/118768cb-e010-4f50-a0e1-e695a2dfbc2d" width="468" height="300" />
 </p>
 
 <p align="center"> Profile page </p><br><br>

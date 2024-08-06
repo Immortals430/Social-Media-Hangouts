@@ -3,7 +3,7 @@ import express from "express";
 import { Server } from "socket.io";
 import http from "http";
 import mongoose from "mongoose";
-import { Chat } from "./chat_schema.js";
+import { Chat } from "./chats_schema.js";
 import { Message } from "./message_schema.js";
 
 const app = express();

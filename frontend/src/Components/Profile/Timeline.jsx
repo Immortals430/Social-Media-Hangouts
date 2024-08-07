@@ -31,6 +31,7 @@ export default function Timeline() {
   const [postPage, setPostPage] = useState(1);
   const [dontFetch, setDontFetch] = useState(false);
   const [loadPost, setLoadPost] = useState(true);
+  const [initialRender, setInitialRender] = useState(true)
 
   // like post
   async function callLike(postId) {
@@ -45,14 +46,15 @@ export default function Timeline() {
     dispatch(deletePost(postId));
   }
 
+
   useEffect(() => {
     const reset = async () => {
       await dispatch(SET_USER_PROFILE({}));
       await dispatch(SET_USER_TIMELINE([]));
       setLoading(true);
       setDontFetch(false);
-      if (postPage == 1) setLoadPost((prev) => !prev);
-      else setPostPage(1);
+      if(!initialRender && postPage == 1) setLoadPost(prev=>!prev)  
+      else if(!initialRender) setPostPage(1)
     };
     reset();
   }, [id]);
@@ -60,7 +62,6 @@ export default function Timeline() {
   // infinite reload posts
   useEffect(() => {
     const callPostAPI = async () => {
-      console.log(dontFetch);
       if (!dontFetch) {
         const { data } = await getPostAPI(postPage, id);
         if (data.length === 0) setDontFetch(true);
@@ -82,6 +83,7 @@ export default function Timeline() {
   };
 
   useEffect(() => {
+    setInitialRender(false)
     const elem = document.querySelector(".profile-main");
     elem.addEventListener("scroll", handleScroll);
     return () => {

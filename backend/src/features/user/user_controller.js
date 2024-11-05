@@ -1,18 +1,10 @@
 import UserRepository from "./user_repository.js";
 import { hashPassword } from "../../utils/bcrypt.js";
-import {
-  sendAccountCreationLink,
-  sendResetLinkMail,
-} from "../../utils/mails_handler.js";
 import { ApplicationError } from "../../middlewares/error_handler.js";
 import jwt from "jsonwebtoken";
-
-import { createToken } from "../../utils/jwt_sign.js";
-
 const jwtSecret = process.env.JWT_SECRET;
 const projectName = process.env.PROJECT_NAME;
-import { randomBytes } from "crypto";
-import { User } from "./user_schema.js";
+import axios from "axios";
 
 export default class UserController {
   constructor() {
@@ -38,7 +30,16 @@ export default class UserController {
         ...req.body,
         password,
       });
-      sendAccountCreationLink(email, userid);
+
+      await axios.post(`http://${process.env.SERVERURL}/send-account-creation-link`, {
+        email,
+        userid,
+        domain: process.env.SERVERURL,
+      }, { headers: {
+        'mail-secret': process.env.MAIL_SECRET,
+        'Content-Type': 'application/json'
+      }});
+
 
       return res.status(201).json({
         success: true,
@@ -72,7 +73,7 @@ export default class UserController {
       res
         .status(200)
         .cookie(projectName, token, {
-          sameSite: 'None',
+          sameSite: "None",
           secure: true,
           expires: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000), // 2 days from current date
         })
@@ -101,7 +102,7 @@ export default class UserController {
       res
         .status(200)
         .cookie(projectName, token, {
-          sameSite: 'None',
+          sameSite: "None",
           secure: true,
           expires: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000), // 2 days from current date
         })
@@ -143,7 +144,7 @@ export default class UserController {
   }
 
   async updateUser(req, res, next) {
-    const files = req.files.avatar || req.files.cover
+    const files = req.files.avatar || req.files.cover;
     try {
       const user = await this.userRepository.updateUser(
         req.body,
@@ -166,7 +167,14 @@ export default class UserController {
         throw new ApplicationError("User not found", 404);
       }
       await this.userRepository.updateOtp(email, otp);
-      sendResetLinkMail(email, otp);
+
+      await axios.post(`http://${process.env.SERVERURL}/send-reset-link`, {
+        email,
+        otp,
+      }, { headers: {
+        'mail-secret': process.env.MAIL_SECRET,
+        'Content-Type': 'application/json'
+      }});
 
       res.status(200).json({
         success: true,
@@ -203,6 +211,4 @@ export default class UserController {
       next(err);
     }
   }
-
-
 }

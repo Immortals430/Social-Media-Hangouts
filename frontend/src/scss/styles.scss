@@ -1,13 +1,13 @@
 @import "constants";
 @import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
-@import "navbar";
-@import "main";
-@import "aside";
-@import "find-friend";
-@import "chatbox";
-@import "profile";
-@import "auth-page";
-@import "settings";
+@import "../Components/Navbar/navbar.scss";
+@import "../Components/Main/main.scss";
+@import "../Components/Aside/aside.scss";
+@import "../Components/FindFriend/find-friend.scss";
+@import "../Components/Chatbox/chatbox.scss";
+@import "../Components/Profile/profile.scss";
+@import "../Components/AuthPage/auth-page.scss";
+@import "../Components/Settings/settings.scss";
 
 * {
   margin: 0;
@@ -53,23 +53,5 @@ main {
   scrollbar-width: none;
 }
 
-// @media only screen and (max-width: 900px){
-//   .chats-container{
-//       width: 100%;
-//       height: 100%;
-//       top: 0;
-//       left: 0;
-//   }
-// }
 
-@media only screen and (max-width: 1004px) {
-  // aside{
-  //   display: none;
-  // }
-  // main{
-  //   width: 100vw;
-  //   margin: 96px 0 0 0;
-  // }
-}
 
-/*# sourceMappingURL=styles.css.map */

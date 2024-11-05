@@ -54,7 +54,7 @@
     padding: 30px 50px;
     box-shadow: 0px 0px 15px 4px rgb(33 33 33 / 37%);
     max-width: 400px;
-    min-width: 330px;
+    min-width: 280px;
 
     > * {
       margin-bottom: 20px;
@@ -143,6 +143,30 @@
   .auth-nav {
     div {
       display: none;
+    }
+  }
+}
+
+
+@media only screen and (max-width: 900px){
+  .login-sec{
+    margin-top: 96px;
+    form{
+      padding: 30px 40px;
+      >*{
+        margin-bottom: 15px;
+      }
+    }
+  }
+  .auth-container{
+    align-items: flex-start;
+  }
+}
+
+@media only screen and (max-width: 500px){
+  .login-sec{
+    form{
+      padding: 30px 30px;
     }
   }
 }

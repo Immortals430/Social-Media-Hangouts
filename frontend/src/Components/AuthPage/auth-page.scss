@@ -30,7 +30,7 @@
 
 .auth-container {
   display: flex;
-  height: 100vh;
+  height: 100dvh;
   align-items: center;
 
   .banner {
@@ -52,7 +52,7 @@
     margin: auto;
     background-color: $white;
     padding: 30px 50px;
-    box-shadow: 0px 0px 15px 4px rgb(33 33 33 / 37%);
+    box-shadow: 0px 0px 15px 10px rgb(224, 224, 224);
     max-width: 400px;
     min-width: 280px;
 

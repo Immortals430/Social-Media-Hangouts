@@ -109,7 +109,7 @@ export default class UserRepository {
     if (hobbies) user.hobbies = hobbies;
     // upload profile cover or dp
     if (file) {
-      const fieldname = file.fieldname;
+      const fieldname = file[0].fieldname;
       const currentDate = Date.now();
       const storage = getStorage();
       const imageSize = fieldname == "avatar" ? 150 : 1280;
@@ -119,7 +119,7 @@ export default class UserRepository {
         await deleteObject(oldImageRef);
       }
       // Process and upload new photo
-      const uint8Array = await compressImage(file.buffer, imageSize);
+      const uint8Array = await compressImage(file[0].buffer, imageSize);
       const newAvatarRef = ref(
         storage,
         `${fieldname}/${fieldname}-${user._id}-${currentDate}.jpeg`

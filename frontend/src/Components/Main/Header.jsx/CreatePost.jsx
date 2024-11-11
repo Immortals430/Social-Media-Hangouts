@@ -6,7 +6,7 @@ import {
   UPDATE_USER_TIMELINE,
   userSelector,
 } from "../../../redux/reducers/user_reducer";
-import { ADD_POST, createPost, postSelector, UPDATE_POST } from "../../../redux/reducers/post_reducer";
+import { ADD_POST, UPDATE_POST } from "../../../redux/reducers/post_reducer";
 import { useParams } from "react-router-dom";
 import { createPostAPI } from "../../../api/api";
 

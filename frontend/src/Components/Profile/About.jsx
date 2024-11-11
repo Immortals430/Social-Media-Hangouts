@@ -7,13 +7,13 @@ import { useSelector } from "react-redux";
 import { userSelector } from "../../redux/reducers/user_reducer";
 import { postSelector } from "../../redux/reducers/post_reducer";
 
-export default function About() {
+export default function About({activeComp}) {
   const { profileUser } = useSelector(userSelector)
 
 
 
   return (
-    <section className='about'>
+    <section className={`about ${activeComp == "about" ? "active" : null}`}>
       <h2>About</h2>
       <ul>
         <li>

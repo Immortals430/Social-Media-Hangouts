@@ -1,8 +1,9 @@
 import { useRef, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { signup } from "../../redux/reducers/user_reducer";
+import MoonLoader from "react-spinners/MoonLoader";
 
-export default function Signup({setAuthForm}) {
+export default function Signup({ setAuthForm }) {
   const passwordRef = useRef();
   const confirmPassRef = useRef();
   const [passwordState, setPasswordState] = useState("");
@@ -10,6 +11,7 @@ export default function Signup({setAuthForm}) {
   const [passwordMatch, setPasswordMatch] = useState(true);
   const [isValidPassword, setIsValidPassword] = useState(false);
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
 
   // set if password is valid or not
   useEffect(() => {
@@ -24,6 +26,7 @@ export default function Signup({setAuthForm}) {
   // signup
   async function callSignup(e) {
     e.preventDefault();
+    setLoading(true)
     if (!passwordMatch && !isValidPassword) return;
     const formData = {
       username: e.target.username.value,
@@ -32,9 +35,13 @@ export default function Signup({setAuthForm}) {
       confirmPassword: e.target.confirmPassword.value,
     };
     const { payload } = await dispatch(signup(formData));
-    if (!payload) return;
-    e.target.reset();
-    setAuthForm("login");
+    if(payload){
+      setLoading(false)
+      e.target.reset();
+      setAuthForm("login");
+      window.alert(payload);
+    }
+    else return   
   }
 
   return (
@@ -74,9 +81,15 @@ export default function Signup({setAuthForm}) {
           Aready have an account?{" "}
           <span onClick={() => setAuthForm("login")}>Login</span>
         </p>
-        <button type="submit" className="login-btn">
-          Signup
-        </button>
+        {loading ? (
+          <div className="login-btn loading">
+            <MoonLoader size={20} color="white" />
+          </div>
+        ) : (
+          <button type="submit" className="login-btn">
+            Signup
+          </button>
+        )}
 
       </form>
     </div>

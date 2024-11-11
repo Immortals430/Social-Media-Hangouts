@@ -15,6 +15,7 @@ export default function Profile() {
   const { id } = useParams();
   const { profileUser, loggedUser  } = useSelector(userSelector)
   const dispatch = useDispatch()
+  const [activeComp, setActiveComp] = useState("posts-main-container")
 
 
   // get user data
@@ -27,14 +28,14 @@ export default function Profile() {
 
   return (
   <main className="profile-main">
-    <ProfileHead />
+    <ProfileHead setActiveComp={setActiveComp} />
 
-    <div className="profile-container">
+    <div className={`profile-container`}>
       <div className="profie-aside">
-        <About />
-        <Photos />
+        <About activeComp={activeComp} />
+        <Photos activeComp={activeComp} />
       </div>
-      <div className="posts-main-container"> 
+      <div className={`posts-main-container ${activeComp == "posts-main-container" ? "active" : null}`}> 
         { loggedUser._id === profileUser._id && <CreatePost /> }
         <Timeline />
       

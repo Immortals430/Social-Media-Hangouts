@@ -144,12 +144,12 @@ export default class UserController {
   }
 
   async updateUser(req, res, next) {
-    const files = req.files.avatar || req.files.cover;
+    const file = req.files.avatar || req.files.cover;
     try {
       const user = await this.userRepository.updateUser(
         req.body,
         req.user.id,
-        files[0]
+        file
       );
       return res.status(200).json(user);
     } catch (error) {
@@ -168,7 +168,7 @@ export default class UserController {
       }
       await this.userRepository.updateOtp(email, otp);
 
-      await axios.post(`http://${process.env.SERVERURL}/send-reset-link`, {
+      await axios.post(`https://${process.env.SERVERURL}/send-reset-link`, {
         email,
         otp,
       }, { headers: {

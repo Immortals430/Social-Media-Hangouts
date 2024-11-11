@@ -10,14 +10,14 @@ import { FaUserCircle } from "react-icons/fa";
 import { IoLogOutSharp } from "react-icons/io5";
 import { FiSettings } from "react-icons/fi";
 
-export default function AsideLeft() {
+export default function AsideLeft({ mobileAside, setMobileAside }) {
   const { loggedUser } = useSelector(userSelector);
   const dispatch = useDispatch();
 
   return (
-    <aside className="left-aside">
+    <aside className={`left-aside ${mobileAside && "active"}`}>
       <section className="aside-main-sec">
-        <Link to={`/profile/${loggedUser._id}`} className="profile-wrapper">
+        <Link to={`/profile/${loggedUser._id}`} className="profile-wrapper" onClick={()=> setMobileAside(false)}>
           <span
             className="profile"
             style={{ backgroundImage: `url(${loggedUser.avatarUrl})` }}
@@ -25,7 +25,7 @@ export default function AsideLeft() {
           <span>{loggedUser.username}</span>
         </Link>
         {/* <div> */}
-        <Link to="/">
+        <Link to="/" onClick={()=> setMobileAside(false)}>
           <span className="home">
             <FiHome size={20} />
           </span>
@@ -33,7 +33,7 @@ export default function AsideLeft() {
         </Link>
         {/* </div> */}
         {/* <div> */}
-        <Link to="/find-friend">
+        <Link to="/find-friend" onClick={()=> setMobileAside(false)}>
           <span className="users">
             <FiUsers size={20} />
           </span>
@@ -84,7 +84,7 @@ export default function AsideLeft() {
         </div>
       </section>
       <section className="aside-extra-sec">
-        <Link to="/settings">
+        <Link to="/settings" onClick={()=> setMobileAside(false)}>
           <span className="setting">
             <FiSettings size={28} />
           </span>

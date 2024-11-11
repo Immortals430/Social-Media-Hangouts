@@ -56,10 +56,10 @@ const userSlice = createSlice({
 // sign up
 export const signup = createAsyncThunk(
   "user/signup",
-  async (args, { dispatch }) => {
+  async (args) => {
     try {
       const { data } = await signupAPI(args);
-      window.alert(data.message);
+      return data.message;
     } catch ({ response }) {
       window.alert(response.data.message);
       return false;

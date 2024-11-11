@@ -1,16 +1,17 @@
 .posts-main {
   margin-right: 280px;
-  height: calc(100vh - 96px - 12px);
+  height: calc(100dvh - 96px - 12px);
   min-width: 464px;
 }
 
 .posts-main-container {
   max-width: 660px;
   margin: auto;
-  padding-right: 15px;
+  padding-right: 6px;
 
   > * {
-    margin: 16px 16px 16px 0;
+    margin-bottom: 16px;
+    margin-top: 16px;
   }
   > header {
     margin-top: 0;
@@ -97,9 +98,7 @@
   justify-content: space-between;
   padding-right: 10px;
   color: $grey;
-  > div > div{
-    
-
+  > div > div {
     > label {
       opacity: 0;
       width: 100%;
@@ -109,10 +108,7 @@
         display: none;
       }
     }
-
-  } 
-
-
+  }
 }
 
 .create-post-options > div {
@@ -257,7 +253,7 @@
       border: transparent;
       cursor: pointer;
 
-      *{
+      * {
         cursor: pointer;
       }
     }
@@ -274,7 +270,6 @@
   overflow-y: auto;
   scrollbar-width: thin;
   padding-right: 15px;
-
 }
 
 hr {
@@ -288,7 +283,7 @@ hr {
 
 .delete-comment {
   padding-top: 8px;
-  *{
+  * {
     cursor: pointer;
   }
 }
@@ -306,6 +301,52 @@ hr {
     h3 {
       color: black;
       margin: 8px 0;
+    }
+  }
+}
+
+
+
+
+@media only screen and (max-width: 1000px){
+
+   .right-aside{
+    display: none;
+  }
+
+  .posts-main{
+    min-width: auto;
+    margin-right: 0;
+  }
+
+  .posts-main-container{
+    margin: 0;
+    padding: 0;
+    margin: auto;
+
+
+  }
+}
+
+
+
+@media only screen and (max-width: 700px){
+  .create-post-options{
+    flex-flow: column;
+    padding: 0;
+
+    >div{
+      justify-content: space-between;
+      margin-bottom: 15px;
+      >div{
+        width: calc(100% / 3);
+      }
+      >div:first-child{
+        justify-content: flex-start;
+      }
+      >div:last-child{
+        justify-content: flex-end;
+      }
     }
   }
 }

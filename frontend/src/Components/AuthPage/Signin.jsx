@@ -42,7 +42,7 @@ export default function Signin({ setAuthForm }) {
           </button>
         )}
 
-        <GoogleOAuthProvider clientId={process.env.REACT_APP_CLIENTID}>
+        <GoogleOAuthProvider clientId={ import.meta.env.VITE_APP_CLIENTID}>
           <GoogleLoginButton />
         </GoogleOAuthProvider>
 

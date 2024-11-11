@@ -25,13 +25,13 @@ import {
   ADD_CHAT,
   SET_ONLINE_USERS,
   SET_UNREAD,
-
   UPDATE_UNREAD,
 } from "../redux/reducers/chat_reducer";
 import { socket } from "../config/socket";
 import Chatbox from "../Components/Chatbox/Chatbox";
 import PropagateLoader from "react-spinners/PropagateLoader";
-
+import Aside_M from "../Components/Aside/Aside_M";
+import Navbar_M from "../Components/Navbar/Navbar_M";
 
 export default function Homepage() {
   const dispatch = useDispatch();
@@ -39,13 +39,14 @@ export default function Homepage() {
   const { path } = useSelector(navigateSelector);
   const { loggedUser, profileUser } = useSelector(userSelector);
   const { user } = useSelector(chatSelector);
-  const [loading, setLoading] = useState(true)
-
+  const [loading, setLoading] = useState(false);
+  const [mobileAside, setMobileAside] = useState(false);
 
   // check validation on initial render
   useEffect(() => {
     async function fetchLoginStatus() {
       const token = Cookies.get("Hangouts");
+
       if (token) {
         const { data } = await getLoggedUser(token);
         dispatch(SET_LOGGED_USER(data));
@@ -53,13 +54,14 @@ export default function Homepage() {
       } else {
         navigate("/auth");
         dispatch(await SET_PATH("auth"));
-
       }
-      setLoading(false)
+      setLoading(false);
     }
     fetchLoginStatus();
-  }, []);
 
+    window.addEventListener('popstate', fetchLoginStatus);
+    return () => window.removeEventListener('popstate', fetchLoginStatus);
+  }, []);
 
   // fetch posts, post login
   useEffect(() => {
@@ -76,7 +78,6 @@ export default function Homepage() {
     setupUserData();
   }, [loggedUser]);
 
-  
   // socket
   useEffect(() => {
     if (loggedUser._id) {
@@ -101,8 +102,18 @@ export default function Homepage() {
 
   return (
     <>
-      {path == "auth" || loading ? null : <Navbar />}
-      {path == "auth" || loading ? null : <AsideLeft />}
+      {path == "auth" || loading ? null : (
+        <>
+          <Navbar mobileAside={mobileAside} setMobileAside={setMobileAside} />
+          <AsideLeft
+            mobileAside={mobileAside}
+            setMobileAside={setMobileAside}
+          />
+          <Aside_M mobileAside={mobileAside} setMobileAside={setMobileAside} />
+          <Navbar_M />
+        </>
+      )}
+
       {loading ? (
         <div className="home-loading">
           <PropagateLoader color="#0055ff" />
@@ -111,6 +122,7 @@ export default function Homepage() {
         <Outlet />
       )}
       {user._id && loggedUser ? <Chatbox /> : null}
+      {/* <Aside_M /> */}
     </>
   );
 }

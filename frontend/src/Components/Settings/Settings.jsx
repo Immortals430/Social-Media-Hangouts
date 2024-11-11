@@ -10,11 +10,8 @@ import { logout } from "../../redux/reducers/user_reducer";
 import { useDispatch } from "react-redux";
 import { MdOutlineFeedback } from "react-icons/md";
 
-
-
 export default function Settings() {
-    const dispatch = useDispatch()
-
+  const dispatch = useDispatch();
 
   return (
     <main className="settings">
@@ -59,7 +56,7 @@ export default function Settings() {
 
         <section>
           <h5>Account</h5>
-          <Link to='/settings/password'>
+          <Link to="/settings/password">
             <div>
               <div className="setting-icons password">
                 <RiLockPasswordLine size={22} />
@@ -87,11 +84,10 @@ export default function Settings() {
           </Link>
           <a href="/" onClick={() => dispatch(logout())}>
             <div>
-              <div className="setting-icons logout" >
+              <div className="setting-icons logout">
                 <IoLogOutSharp size={22} />
               </div>
               <div className="description">Logout</div>
-
             </div>
           </a>
         </section>

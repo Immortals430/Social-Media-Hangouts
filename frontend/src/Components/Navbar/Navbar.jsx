@@ -9,24 +9,26 @@ import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { userSelector } from "../../redux/reducers/user_reducer";
+import Hamburger from "hamburger-react";
 
-export default function Navbar() {
-  let { loggedUser } = useSelector(userSelector)
+
+export default function Navbar({mobileAside, setMobileAside}) {
+  let { loggedUser } = useSelector(userSelector);
   let { pathname } = useLocation();
-  const [path, setPath] = useState('')
+  const [path, setPath] = useState("");
+
 
   useEffect(() => {
     const path = pathname.split("/")[1];
-    setPath(path)
+    setPath(path);
   }, [pathname]);
 
-  
-  function activeLink(){
+  const activeLink = () => {
     return {
       color: "#0055ff",
-      backgroundColor: "#d0e4ff"
-    }
-  }
+      backgroundColor: "#d0e4ff",
+    };
+  };
 
   return (
     <nav>
@@ -38,7 +40,10 @@ export default function Navbar() {
         <Link to="/" style={path === "" ? activeLink() : null}>
           <FiHome size={25} />
         </Link>
-        <Link to="/find-friend" style={path === "find-friend" ? activeLink() : null}>
+        <Link
+          to="/find-friend"
+          style={path === "find-friend" ? activeLink() : null}
+        >
           <FiUsers size={25} />
         </Link>
         <Link style={path == "/" ? activeLink() : null}>
@@ -56,9 +61,18 @@ export default function Navbar() {
           <FaRegMessage size={25} />
         </div>
         <Link to={`/profile/${loggedUser._id}`}>
-          <div className="nav-profile" style={{backgroundImage: `url(${loggedUser.avatarUrl})`}}></div>
+          <div
+            className="nav-profile"
+            style={{ backgroundImage: `url(${loggedUser.avatarUrl})` }}
+          ></div>
           {/* <FaUserCircle size={25} /> */}
         </Link>
+        <div className="nav-burger-menu">
+          <span >
+            <Hamburger toggled={mobileAside} toggle={setMobileAside} />
+          </span>
+          {/* <NavRightCont_M mobileNavRight={mobileAside} setMobileNavRight={setMobileAside} /> */}
+        </div>
       </div>
     </nav>
   );

@@ -13,7 +13,7 @@ import {
   setSeen,
 } from "../../redux/reducers/chat_reducer";
 
-export default function ProfileHead() {
+export default function ProfileHead({setActiveComp}) {
   const { loggedUser, profileUser } = useSelector(userSelector);
   const dispatch = useDispatch();
   const { friends, friendReqsRec } = useSelector(friendsSelector);
@@ -146,6 +146,26 @@ export default function ProfileHead() {
               <h4>{profileUser.username}</h4>
             </div>
             <div className="connects-container">
+                        <div
+            className="blue-btn"
+            onClick={() =>
+              dispatch(
+                respondReq({ friendId: profileUser._id, respond: "accept" })
+              )
+            }
+          >
+            Accept
+          </div>
+          <div
+            className="red-btn"
+            onClick={() =>
+              dispatch(
+                respondReq({ friendId: profileUser._id, respond: "reject" })
+              )
+            }
+          >
+            Reject
+          </div>
               {loggedUser._id == profileUser._id
                 ? null
                 : profileBtnOptions(profileUser)}
@@ -153,10 +173,10 @@ export default function ProfileHead() {
           </div>
         </form>
         <div className="links">
-          <div>About</div>
-          <div>Friends</div>
-          <div>Photos</div>
-          <div>Timeline</div>
+          <div onClick={() => setActiveComp("about")}>About</div>
+          <div onClick={() => setActiveComp("friends")}>Friends</div>
+          <div onClick={() => setActiveComp("photos")}>Photos</div>
+          <div onClick={() => setActiveComp("posts-main-container")}>Timeline</div>
         </div>
       </header>
     </div>

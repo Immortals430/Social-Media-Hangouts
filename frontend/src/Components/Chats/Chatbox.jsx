@@ -24,9 +24,6 @@ export default function Chatbox() {
   const [chatPage, setChatPage] = useState(1);
   const [loading, setLoading] = useState(true);
 
-  console.log(user)
-
-
   // infinite reload posts
   useEffect(() => {
     const callGetChastAPI = async () => {

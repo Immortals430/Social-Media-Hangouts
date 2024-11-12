@@ -20,7 +20,7 @@ const postSlice = createSlice({
     },
     UPDATE_POST: (state, action) => {
       const index = state.posts.findIndex(
-        (post) => post._id === action.payload.uniqueId
+        (post) => post._id === action.payload._id
       );
       delete action.payload.uniqueId;
       state.posts[index] = action.payload;

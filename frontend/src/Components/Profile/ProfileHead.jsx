@@ -146,26 +146,7 @@ export default function ProfileHead({setActiveComp}) {
               <h4>{profileUser.username}</h4>
             </div>
             <div className="connects-container">
-                        <div
-            className="blue-btn"
-            onClick={() =>
-              dispatch(
-                respondReq({ friendId: profileUser._id, respond: "accept" })
-              )
-            }
-          >
-            Accept
-          </div>
-          <div
-            className="red-btn"
-            onClick={() =>
-              dispatch(
-                respondReq({ friendId: profileUser._id, respond: "reject" })
-              )
-            }
-          >
-            Reject
-          </div>
+ 
               {loggedUser._id == profileUser._id
                 ? null
                 : profileBtnOptions(profileUser)}

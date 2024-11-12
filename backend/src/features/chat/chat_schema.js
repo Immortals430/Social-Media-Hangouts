@@ -5,7 +5,7 @@ import { Schema } from "mongoose";
 let chatSchema = new Schema({
   users: [{
     type: Schema.Types.ObjectId,
-    // ref: "User",
+    ref: "users",
     required: true
  }],
   lastMessage: {

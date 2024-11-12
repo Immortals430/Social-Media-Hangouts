@@ -70,7 +70,7 @@ export default function Aside_M({ mobileAside, setMobileAside }) {
             <span>Groups</span>
           </div>
         </Link>
-        <Link>
+        <Link to={"/chatlist"} onClick={() => setMobileAside(false)}>
           <div>
             <span className="chats">
               <FaRegMessage size={25} />

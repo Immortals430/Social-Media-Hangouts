@@ -11,6 +11,7 @@ import ErrorPage from "./Components/ErrorPage";
 import AccountSettings from "./Components/Settings/SubSettings/AccountSettings";
 import AddressSettings from "./Components/Settings/SubSettings/AddressSettings"
 import PasswordSettings from "./Components/Settings/SubSettings/PasswordSettings";
+import Chats from "./Components/Chats/Chats";
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
       { path: '/auth', element: <AuthPage /> },
       { path: '/find-friend', element: <FindFriend /> },
       { path: '/profile/:id', element: <Profile />},
+      { path: '/chatlist',  element: <Chats />},
       { path: "/settings", element: <Settings />},
       { path: "/settings/account", element: <AccountSettings />},
       { path: "/settings/address", element: <AddressSettings />},

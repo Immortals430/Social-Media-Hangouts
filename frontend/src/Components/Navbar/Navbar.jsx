@@ -11,12 +11,10 @@ import { useSelector } from "react-redux";
 import { userSelector } from "../../redux/reducers/user_reducer";
 import Hamburger from "hamburger-react";
 
-
-export default function Navbar({mobileAside, setMobileAside}) {
+export default function Navbar({ mobileAside, setMobileAside }) {
   let { loggedUser } = useSelector(userSelector);
   let { pathname } = useLocation();
   const [path, setPath] = useState("");
-
 
   useEffect(() => {
     const path = pathname.split("/")[1];
@@ -46,8 +44,15 @@ export default function Navbar({mobileAside, setMobileAside}) {
         >
           <FiUsers size={25} />
         </Link>
-        <Link style={path == "/" ? activeLink() : null}>
+        <Link style={path == "/" ? activeLink() : null} className="store">
           <MdOutlineLocalGroceryStore size={25} />
+        </Link>
+        <Link
+          to={"/chatlist"}
+          style={path == "/chatlist" ? activeLink() : null}
+          className="chats"
+        >
+          <FaRegMessage size={25} />
         </Link>
         <Link style={path == "/" ? activeLink() : null}>
           <HiOutlineUserGroup size={25} />
@@ -58,7 +63,9 @@ export default function Navbar({mobileAside, setMobileAside}) {
           <FaRegBell size={25} />
         </div>
         <div>
-          <FaRegMessage size={25} />
+          <Link to={"/chatlist"}>
+            <FaRegMessage size={25} />
+          </Link>
         </div>
         <Link to={`/profile/${loggedUser._id}`}>
           <div
@@ -68,7 +75,7 @@ export default function Navbar({mobileAside, setMobileAside}) {
           {/* <FaUserCircle size={25} /> */}
         </Link>
         <div className="nav-burger-menu">
-          <span >
+          <span>
             <Hamburger toggled={mobileAside} toggle={setMobileAside} />
           </span>
           {/* <NavRightCont_M mobileNavRight={mobileAside} setMobileNavRight={setMobileAside} /> */}

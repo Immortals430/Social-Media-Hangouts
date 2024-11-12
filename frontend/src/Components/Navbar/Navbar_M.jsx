@@ -4,6 +4,7 @@ import { HiOutlineUserGroup } from "react-icons/hi2";
 import { MdOutlineLocalGroceryStore } from "react-icons/md";
 import { Link } from "react-router-dom";
 
+
 export default function Navbar_M() {
   return (
     <section className="navbar-m">

@@ -99,6 +99,63 @@
 }
 
 
+.chats{
+  font-family: "Montserrat", sans-serif;
+  >div{
+    background-color: $white;
+    margin: auto;
+    max-width: 800px;
+    padding: 48px;
+    border-radius: 5px;
+    min-height: calc(100dvh - 96px - 12px );
+  }
+
+  section{
+    margin-top: 40px;
+    @include fontstyle;
+    font-size: $font-mid;
+
+  }
+
+  .chatlist-container{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 25px
+  }
+
+  .user-icon{
+    @include icons;
+    @include background;
+    width: 60px;
+    height: 60px;
+  }
+
+  h3{
+    color: $grey;  
+    margin-bottom: 5px;
+  }
+
+  p{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    overflow: hidden;
+    color: black;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
 
 @media only screen and (max-width: 1000px){
   .chats-container{
@@ -112,5 +169,14 @@
     height: 100dvh;
     top: 0;
     left: 0;
+    z-index: 100;
+  }
+}
+
+@media only screen and (max-width: 500px){
+  .chats{
+    >div{
+      padding: 25px;
+    }
   }
 }

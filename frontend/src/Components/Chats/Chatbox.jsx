@@ -18,11 +18,14 @@ import { Link } from "react-router-dom";
 
 export default function Chatbox() {
   const dispatch = useDispatch();
-  const { user, chats, chatLoading, onlineUsers } = useSelector(chatSelector);
+  const { user, chats, onlineUsers } = useSelector(chatSelector);
   const { loggedUser } = useSelector(userSelector);
   const [dontFetch, setDontFetch] = useState(false);
   const [chatPage, setChatPage] = useState(1);
   const [loading, setLoading] = useState(true);
+
+  console.log(user)
+
 
   // infinite reload posts
   useEffect(() => {
@@ -37,7 +40,7 @@ export default function Chatbox() {
     callGetChastAPI();
   }, [chatPage, user._id]);
 
-
+  
   const handleScroll = async (e) => {
     const totalHeight = e.target.scrollHeight;
     const scrollTop = e.target.scrollTop;

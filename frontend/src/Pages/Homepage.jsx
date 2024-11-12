@@ -28,10 +28,11 @@ import {
   UPDATE_UNREAD,
 } from "../redux/reducers/chat_reducer";
 import { socket } from "../config/socket";
-import Chatbox from "../Components/Chatbox/Chatbox";
+import Chatbox from "../Components/Chats/Chatbox";
 import PropagateLoader from "react-spinners/PropagateLoader";
 import Aside_M from "../Components/Aside/Aside_M";
 import Navbar_M from "../Components/Navbar/Navbar_M";
+import Chats from "../Components/Chats/Chats";
 
 export default function Homepage() {
   const dispatch = useDispatch();
@@ -122,7 +123,7 @@ export default function Homepage() {
         <Outlet />
       )}
       {user._id && loggedUser ? <Chatbox /> : null}
-      {/* <Aside_M /> */}
+
     </>
   );
 }

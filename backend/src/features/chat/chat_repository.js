@@ -9,7 +9,7 @@ export default class ChatRepository {
         .sort({ _id: -1 })
         .skip(skip)
         .limit(limit)
-        .select("-seenBy -chatId")
+        .select("-seenBy -chatId");
 
       return chats;
     } else return [];
@@ -24,5 +24,14 @@ export default class ChatRepository {
         { returnDocument: "after" }
       );
     }
+  }
+
+  async updateRead(userId) {
+    const chatList = await Chat.find({ users: { $in: userId } }).populate([
+      { path: "users", select: "username avatarUrl" },
+      { path: "lastMessage", select: "content" },
+    ]);
+
+    return chatList
   }
 }

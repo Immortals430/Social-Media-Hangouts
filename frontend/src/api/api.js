@@ -72,3 +72,5 @@ export const changePasswordAPI = (data) =>
 
 export const deleteCommentAPI = (commentId) =>
   API.delete(`/comment/delete/${commentId}`);
+
+export const getChatListAPI = () => API.get("/chats/get-chat-list")

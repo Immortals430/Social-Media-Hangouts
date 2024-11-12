@@ -35,4 +35,14 @@ export default class ChatController {
       next(err);
     }
   }
+
+  async getChatList(req, res, next){
+    try{
+      const chatList = await this.chatRepository.updateRead(req.user.id);
+      res.status(200).json(chatList)
+    }
+    catch(err){
+      next(err)
+    }
+  } 
 }

@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { updateReadAPI } from "../../api/api";
 
 const initialState = {
+  chatList: [],
   user: {},
   chats: [],
   unreadMsg: [],
@@ -14,17 +15,15 @@ const chatSlice = createSlice({
     SET_USER: (state, action) => {
       state.user = action.payload;
     },
-
     ADD_CHAT: (state, action) => {
       state.chats = [...action.payload, ...state.chats];
     },
     SET_CHAT_HISTORY: (state, action) => {
       state.chats = [...state.chats, ...action.payload];
     },
-    RESET_CHAT: (state, action) => {
+    RESET_CHAT: (state) => {
       state.chats = [];
     },
-
     SET_UNREAD: (state, action) => {
       state.unreadMsg = action.payload;
     },
@@ -36,11 +35,12 @@ const chatSlice = createSlice({
       const index = state.unreadMsg.indexOf(action.payload);
       if (index !== -1) state.unreadMsg.splice(index, 1);
     },
-
-
     SET_ONLINE_USERS: (state, action) => {
       state.onlineUsers = action.payload;
     },
+    SET_CHATLIST: (state, action) => {
+      state.chatList = action.payload
+    }
   },
 });
 
@@ -53,6 +53,8 @@ export const setSeen = createAsyncThunk("chats/setSeen", async (friendId) => {
   }
 });
 
+
+
 export const {
   SET_USER,
   ADD_CHAT,
@@ -62,6 +64,7 @@ export const {
   RESET_CHAT,
   SET_ONLINE_USERS,
   SET_CHAT_HISTORY,
+  SET_CHATLIST
 } = chatSlice.actions;
 export const chatReducer = chatSlice.reducer;
 export const chatSelector = (state) => state.chatReducer;

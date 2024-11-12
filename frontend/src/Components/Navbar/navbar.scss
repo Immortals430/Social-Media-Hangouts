@@ -32,9 +32,13 @@ nav * {
   font-size: $font-lg;
 }
 
-.nav-mid-container * {
+.nav-mid-container {
+  .chats{
+    display: none;
+  }
+  * {
   cursor: pointer;
-}
+}}
 
 .nav-right-container {
   min-width: 130px;
@@ -84,6 +88,15 @@ nav * {
       display: block;
     }
   }
+
+  .nav-mid-container{
+    .chats{
+      display: flex;
+    }
+    .store{
+      display: none;
+    }
+  }
 }
 
 
@@ -91,6 +104,12 @@ nav * {
   .nav-mid-container{
     display: none;
   }
+
+  .nav-mid-container {
+
+    * {
+    cursor: pointer;
+  }}
 
   .navbar-m{
     display: flex;

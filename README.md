@@ -7,56 +7,19 @@ Link to production site: [Social Media Hangouts](https://hangouts.pages.dev/)
 
 
 ## Updates
-- Improved code for scalability
-- Improved security
-- Optimized for faster experience
-- New UI
+- Responsiveness added
+- Chats list section added
+- some minor bug fixed
+- otp not receiving fixed
 
 
-
-## Run Locally
-
-Clone the project
-
-```bash
-  git clone https://github.com/Immortals430/Social-Media-Hangouts.git
-```
-
-Run all files in different terminals
-
-```bash
-  cd Social-Media-Hangouts
-  cd backend
-  npm i
-  npm start
-```
-
-```bash
-  cd Social-Media-Hangouts
-  cd frontend
-  npm i
-  npm start
-```
-
-```bash
-  cd Social-Media-Hangouts
-  cd socket
-  npm i
-  npm start
-```
-
-
-
-
-Backend environment variables
+## Backend environment variables
 
 `PROJECT_NAME`
 `PORT`
 `DB`
 `JWT_SECRET`
-`NODEMAILER_SERVICE`
-`NODEMAILER_USER`
-`NODEMAILER_PASS`
+`MAIL_SECRET`
 `FIREBASE_API`
 `FIREBASE_AUTHDOMAIN`
 `FIREBASE_PROJECTID`

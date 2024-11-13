@@ -1,0 +1,172 @@
+.auth-nav {
+  display: flex;
+  background-color: transparent;
+  justify-content: space-between;
+  @include fontstyle;
+  color: $white;
+
+  > div {
+    gap: 10px;
+
+    > div {
+      cursor: pointer;
+    }
+  }
+}
+
+.nav-login-btn {
+  width: 100px;
+  height: 52px;
+  background-color: #343a40;
+  border-radius: 5px;
+}
+
+.nav-register-btn {
+  width: 100px;
+  height: 52px;
+  background-color: $theme;
+  border-radius: 5px;
+}
+
+.auth-container {
+  display: flex;
+  height: 100dvh;
+  align-items: center;
+
+  .banner {
+    overflow: hidden;
+    width: 42%;
+    height: 100%;
+    background-size: cover;
+    img {
+      width: 100%;
+      @include center;
+    }
+  }
+}
+
+.login-sec {
+  width: 58%;
+  form {
+    font-family: sans-serif;
+    margin: auto;
+    background-color: $white;
+    padding: 30px 50px;
+    box-shadow: 0px 0px 15px 10px rgb(224, 224, 224);
+    max-width: 400px;
+    min-width: 280px;
+
+    > * {
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+    input {
+      width: 100%;
+      border: none;
+      padding: 10px;
+      border-bottom: 1px solid black;
+      padding-left: 5px;
+      outline: none;
+      font-size: 1rem;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    > div,
+    button {
+      @include center;
+      width: 100%;
+      border: none;
+      padding: 15px;
+      color: white;
+      font-weight: bold;
+      border-radius: 5px;
+      margin-bottom: 15px;
+    }
+
+    .login-btn {
+      background-color: #343a40;
+    }
+
+    .google-login-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background-color: #dc4c38;
+      padding: 13px;
+    }
+
+    p {
+      color: blue;
+      cursor: pointer;
+    }
+
+    .signup-btn {
+      background-color: $theme;
+    }
+    .signup-para {
+      margin-bottom: 15px;
+      color: black;
+      cursor: default;
+    }
+    .send-otp-btn {
+      background-color: $theme;
+    }
+
+    .loading {
+      padding: 10px;
+    }
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .auth-container {
+    justify-content: center;
+  }
+  .banner {
+    display: none;
+  }
+
+  .login-sec {
+    width: auto;
+    form {
+      margin: 15px;
+    }
+  }
+
+  .auth-nav {
+    div {
+      display: none;
+    }
+  }
+}
+
+
+@media only screen and (max-width: 900px){
+  .login-sec{
+    margin-top: 96px;
+    form{
+      padding: 30px 40px;
+      >*{
+        margin-bottom: 15px;
+      }
+    }
+  }
+  .auth-container{
+    align-items: flex-start;
+  }
+}
+
+@media only screen and (max-width: 500px){
+  .login-sec{
+    form{
+      padding: 30px 30px;
+    }
+  }
+}

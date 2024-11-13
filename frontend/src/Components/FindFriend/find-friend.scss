@@ -1,0 +1,135 @@
+.friends {
+  @include fontstyle;
+
+  > * {
+    max-width: 990px;
+    margin: 30px auto 50px;
+  }
+
+  .grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    justify-content: center;
+    gap: 40px;
+    padding: 0 20px;
+    >*{
+      margin:auto
+    }
+  }
+}
+
+.filter-friend {
+  height: 80px;
+  background-color: $white;
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  border-radius: 10px;
+  margin-top: 0;
+}
+
+.filter-friend > h2 {
+  flex: 1;
+  color: black;
+  font-size: 1.2rem;
+}
+
+.filter-friend form {
+  display: flex;
+}
+
+.filter-friend input {
+  border: none;
+  background-color: $light-grey;
+  padding: 6px 12px;
+  border-right: 1px $grey solid;
+}
+
+.filter-friend button {
+  @include center;
+  border: none;
+  background-color: $light-grey;
+  padding: 6px 12px;
+  color: $grey;
+}
+
+.user-card {
+  $margin-side: 3px;
+  display: inline-block;
+  background-color: $white;
+  border-radius: 10px;
+  margin: 6px $margin-side;
+  // position: relative;
+  // height: 285px;
+  padding: 20px;
+
+
+  > .user-image{
+    cursor: pointer;
+  }
+
+  .user-image {
+    // @include background;
+    // width: calc(990px / 5 - ($margin-side * 2));
+    width: 50%;
+    // height: 250px;
+    border-radius: 50%;
+    margin: auto;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .details {
+    // position: absolute;
+    // bottom: 0;
+    color: black;
+    // background: #eaf3fab0;
+    width: 100%;
+    font-size: 1rem;
+    border-radius: 4px;
+    text-align: center;
+
+    > div {
+      @include button;
+      height: auto;
+      padding: 10px;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+    h3 {
+      margin-bottom: 15px;
+    }
+    .accept-btn {
+      background-color: $theme;
+      cursor: pointer;
+    }
+
+    .send-req-btn {
+      background-color: #10d876;
+      cursor: pointer;
+    }
+
+    .reject-btn {
+      background-color: red;
+      cursor: pointer;
+    }
+  }
+}
+
+.friend-req-head .user-image{
+  height: 208px;
+  cursor: pointer;
+}
+
+
+.friend-req-head, .friend-sugg-head {
+  padding: 0 24px;
+  color: black;
+
+  h2 {
+    flex: 1;
+    font-size: 1.2rem;
+    height: 45px;
+  }
+}
+

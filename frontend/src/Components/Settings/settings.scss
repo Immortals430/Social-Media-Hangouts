@@ -1,0 +1,195 @@
+.settings {
+  font-family: "Montserrat", sans-serif;
+  > div {
+    background-color: $white;
+    margin: auto;
+    max-width: 800px;
+    padding: 48px;
+    border-radius: 5px;
+
+    > h1 {
+      font-size: 32px;
+      margin-bottom: 48px;
+    }
+
+    > section {
+      margin-bottom: 24px;
+
+      > h5 {
+        margin-bottom: 8px;
+      }
+      > * {
+        width: 100%;
+      }
+
+      > a > div {
+        display: flex;
+        align-items: center;
+        padding: 8px 0;
+        width: 100%;
+
+        .setting-icons {
+          @include center;
+          @include icons;
+          color: white;
+          margin-right: 16px;
+        }
+
+        span {
+          cursor: pointer;
+          *{
+            cursor: pointer;
+          }
+        }
+
+        .description {
+          flex: 1;
+          font-weight: bold;
+          color: $grey;
+          cursor: pointer;
+        }
+
+        .account {
+          background: linear-gradient(to right, #0575e6, #021b79);
+        }
+
+        .address {
+          background: linear-gradient(to right, #f2994a, #f2c94c);
+        }
+
+        .social {
+          background: linear-gradient(to right, #e44d26, #f16529);
+        }
+
+        .password {
+          background: linear-gradient(to right, #0575e6, #021b79);
+        }
+
+        .feedback {
+          background: linear-gradient(135deg, #05f, #09f);
+        }
+
+        .logout {
+          background: linear-gradient(to right, #ee0979, #ff6a00);
+        }
+      }
+    }
+  }
+}
+
+.account-setting {
+  font-family: "Montserrat", sans-serif;
+  > div {
+    background-color: $white;
+    margin: auto;
+    max-width: 800px;
+    padding: 48px;
+    border-radius: 5px;
+
+    > h1 {
+      display: flex;
+      align-items: center;
+      font-size: 32px;
+      margin-bottom: 48px;
+    }
+  }
+
+  .account-setting-form {
+    > div {
+      align-items: center;
+      display: flex;
+      padding: 8px 0;
+      justify-content: space-between;
+
+      > span {
+        min-width: 160px;
+        display: inline-block;
+        font-weight: bold;
+      }
+      > input,
+      select {
+        display: inline-block;
+        flex: 1;
+        max-width: 350px;
+        height: 40px;
+        font-size: large;
+        padding: 0 10px;
+        outline: none;
+      }
+
+      > div {
+        max-width: 350px;
+        flex: 1;
+
+        > input {
+          display: inline-block;
+          height: 40px;
+          font-size: large;
+          padding: 0 10px;
+          outline: none;
+          width: 120px;
+        }
+      }
+    }
+
+    .button {
+      justify-content: flex-end;
+
+      button {
+        padding: 8px 20px;
+        border: 2px #0055ff solid;
+        color: #0055ff;
+        background-color: transparent;
+        border-radius: 5px;
+        font-weight: bold;
+        transition: all 0.5s;
+        cursor: pointer;
+        margin-top: 30px;
+      }
+
+      button:hover {
+        color: white;
+        background-color: $theme;
+      }
+    }
+
+    > p {
+      margin: 20px 0;
+    }
+  }
+
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
+@media only screen and (max-width: 700px){
+  .settings{
+    scrollbar-width: none;
+  }
+
+  .account-setting > div{
+    padding: 48px 20px;
+    min-height: calc(100vh - 104px - 62px);
+
+  }
+
+  .account-setting-form > div{
+    span{
+      max-width: 110px;
+    }
+    input{
+      min-width: 100px
+    }
+  }
+}
+
+@media only screen and (max-width: 400px){
+  .settings{
+    >div{
+      padding: 48px 30px;
+    }
+  }
+}

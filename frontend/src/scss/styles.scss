@@ -1,0 +1,70 @@
+@import "constants";
+@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+@import "../Components/Navbar/navbar.scss";
+@import "../Components/Main/main.scss";
+@import "../Components/Aside/aside.scss";
+@import "../Components/FindFriend/find-friend.scss";
+@import "../Components/Chats/chats.scss";
+@import "../Components/Profile/profile.scss";
+@import "../Components/AuthPage/auth-page.scss";
+@import "../Components/Settings/settings.scss";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  scrollbar-width: thin;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+div {
+  cursor: default;
+}
+
+body {
+  background-color: $light-grey;
+}
+
+a {
+  color: inherit;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.home-loading {
+  @include center;
+  width: 100vw;
+  height: 100vh;
+}
+
+main {
+  margin-left: 280px;
+  margin-right: 0;
+  margin-top: calc(96px + 8px);
+  min-width: 700px;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+
+
+@media only screen and (max-width: 1000px){
+  main{
+    margin: 104px 0 0 0;
+    min-width: auto;
+  }
+}
+
+
+@media only screen and (max-width: 700px){
+  main{
+    margin-bottom: 62px;
+  }
+}

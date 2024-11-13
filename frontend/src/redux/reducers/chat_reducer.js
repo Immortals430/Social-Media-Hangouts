@@ -1,51 +1,70 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fetchChatstAPI } from "../../api/api";
-
+import { updateReadAPI } from "../../api/api";
 
 const initialState = {
-    user: {},
-    chats: [],
-    unreadMsg: [],
-    onlineUsers: []
-}
+  chatList: [],
+  user: {},
+  chats: [],
+  unreadMsg: [],
+  onlineUsers: [],
+};
 const chatSlice = createSlice({
-    name: 'chat',
-    initialState,
-    reducers: {
-        SET_USER: (state, action) => {
-            state.user = action.payload
-        },
-        SET_CHATS: (state, action) => {
-            state.chats = action.payload
-        },
-        SET_CHAT_UPDATE: (state, action) => {
-           state.chats.push(action.payload)
-        },
-        SET_UNREAD: (state, action) => {
-            if(state.unreadMsg.includes(action.payload)) return
-            else state.unreadMsg.push(action.payload)          
-        },
-        SET_RESET: (state, action) => {
-            state.user = {}
-            state.chats = []
-            const index = state.unreadMsg.indexOf(action.payload)
-            state.unreadMsg.splice(index, 1)
-        },
-        SET_ONLINE_USERS: (state, action) => {
-            state.onlineUsers = action.payload
-        }
+  name: "chat",
+  initialState,
+  reducers: {
+    SET_USER: (state, action) => {
+      state.user = action.payload;
+    },
+    ADD_CHAT: (state, action) => {
+      state.chats = [...action.payload, ...state.chats];
+    },
+    SET_CHAT_HISTORY: (state, action) => {
+      state.chats = [...state.chats, ...action.payload];
+    },
+    RESET_CHAT: (state) => {
+      state.chats = [];
+    },
+    SET_UNREAD: (state, action) => {
+      state.unreadMsg = action.payload;
+    },
+    UPDATE_UNREAD: (state, action) => {
+      const id = state.unreadMsg.find((elem) => elem === action.payload);
+      if (!id) state.unreadMsg.push(action.payload);
+    },
+    REMOVE_UNREAD: (state, action) => {
+      const index = state.unreadMsg.indexOf(action.payload);
+      if (index !== -1) state.unreadMsg.splice(index, 1);
+    },
+    SET_ONLINE_USERS: (state, action) => {
+      state.onlineUsers = action.payload;
+    },
+    SET_CHATLIST: (state, action) => {
+      state.chatList = action.payload
     }
-})
+  },
+});
+
+// set unread
+export const setSeen = createAsyncThunk("chats/setSeen", async (friendId) => {
+  try {
+    await updateReadAPI(friendId);
+  } catch (err) {
+    console.log(err);
+  }
+});
 
 
-// fetch chats
-export const fetchChats = createAsyncThunk('chats/fetchChats', async (args, { dispatch }) => {
-    const { data } = await fetchChatstAPI(args)
-    dispatch(SET_CHATS(data.data))
-})
 
-
-
-export const {SET_USER, SET_CHATS, SET_CHAT_UPDATE,SET_UNREAD,SET_RESET, SET_ONLINE_USERS} = chatSlice.actions
-export const chatReducer = chatSlice.reducer
-export const chatSelector = state => state.chatReducer
+export const {
+  SET_USER,
+  ADD_CHAT,
+  SET_UNREAD,
+  REMOVE_UNREAD,
+  UPDATE_UNREAD,
+  RESET_CHAT,
+  SET_ONLINE_USERS,
+  SET_CHAT_HISTORY,
+  SET_CHATLIST
+} = chatSlice.actions;
+export const chatReducer = chatSlice.reducer;
+export const chatSelector = (state) => state.chatReducer;

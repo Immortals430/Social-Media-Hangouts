@@ -31,7 +31,7 @@ export default class UserController {
         password,
       });
 
-      await axios.post(`http://${process.env.SERVERURL}/send-account-creation-link`, {
+      await axios.post(`http://${process.env.MAIL_URL}/send-account-creation-link`, {
         email,
         userid,
         domain: process.env.SERVERURL,
@@ -168,7 +168,7 @@ export default class UserController {
       }
       await this.userRepository.updateOtp(email, otp);
 
-      await axios.post(`https://${process.env.SERVERURL}/send-reset-link`, {
+      await axios.post(`https://${process.env.MAIL_URL}/send-reset-link`, {
         email,
         otp,
       }, { headers: {

@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { signin } from "../../redux/reducers/user_reducer";
 import { GoogleOAuthProvider } from "@react-oauth/google";
-import { GoogleLoginButton } from "./GoogleLoginButton";
+import GoogleLoginButton from "./GoogleLoginButton";
 import { useState } from "react";
 import MoonLoader from "react-spinners/MoonLoader";
 
@@ -18,7 +18,7 @@ export default function Signin({ setAuthForm }) {
     await dispatch(signin({ email, password }));
     setLoading(false);
   }
-  // console.log(loading)
+
   return (
     <div className="login-sec">
       <form onSubmit={callSignin}>
@@ -42,11 +42,12 @@ export default function Signin({ setAuthForm }) {
           </button>
         )}
 
-        <GoogleOAuthProvider clientId={ import.meta.env.VITE_APP_CLIENTID}>
+        <GoogleOAuthProvider clientId={ import.meta.env.VITE_APP_CLIENTID }>
           <GoogleLoginButton />
         </GoogleOAuthProvider>
 
         <p className="signup-para">Dont have an account?</p>
+        
         <button
           type="button"
           className="signup-btn"

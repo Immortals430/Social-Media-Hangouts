@@ -114,7 +114,7 @@ export default class UserRepository {
       const storage = getStorage();
       const imageSize = fieldname == "avatar" ? 150 : 1280;
       // Delete old photo if not the default one
-      if (user[fieldname] !== "image-user.svg") {
+      if (user[fieldname] !== "image-user.jpg") {
         const oldImageRef = ref(storage, `${fieldname}/${user[fieldname]}`);
         await deleteObject(oldImageRef);
       }

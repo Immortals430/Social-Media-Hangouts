@@ -27,11 +27,21 @@
   }
   .msg-head-dp {
     @include icons;
-    @include background;
     height: 35px;
     width: 35px;
-    border: 1px solid black;
+    >img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 50%;
+    }
   }
+
+  .msg-head-dp.loading{
+    background-color: lightgrey;
+  }
+
   .msg-head-name {
     flex: 1;
     color: $theme;
@@ -122,6 +132,18 @@
     align-items: center;
     gap: 20px;
     margin-bottom: 25px
+  }
+
+  .chatlist-container.loading{
+    display: block;
+    margin-bottom: 50px;
+    >div{
+      margin-bottom: 10px;
+      height: 20px;
+      background-color: lightgrey;
+      width: 100%;
+      border-radius: 20px;
+    }
   }
 
   .user-icon{

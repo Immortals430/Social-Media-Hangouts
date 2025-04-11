@@ -5,7 +5,8 @@ import Photos from "./Photos";
 import { useDispatch, useSelector } from "react-redux";
 import { ADD_USER_TIMELINE_POST, getUser, getUserTimeline, LOAD_USER_TIMELINE, SET_USER_PROFILE, SET_USER_TIMELINE, userSelector } from "../../redux/reducers/user_reducer";
 import { useParams } from "react-router-dom";
-import CreatePost from "../Main/Header.jsx/CreatePost";
+// import CreatePost from "../Main/Header.jsx/CreatePost";
+import CreatePost from "../Homepage/Header.jsx/CreatePost";
 import Timeline from "./Timeline";
 import { getPostAPI } from "../../api/api";
 

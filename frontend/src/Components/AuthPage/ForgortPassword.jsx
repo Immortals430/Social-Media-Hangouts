@@ -8,8 +8,6 @@ import { changePassword } from "../../redux/reducers/user_reducer";
 import MoonLoader from "react-spinners/MoonLoader";
 
 export default function ForgortPassword({ setAuthForm }) {
-  const passwordRef = useRef();
-  const confirmPassRef = useRef();
   const emailRef = useRef();
   const [passwordState, setPasswordState] = useState("");
   const [confirmPassState, setConfirmPassState] = useState("");
@@ -90,20 +88,18 @@ export default function ForgortPassword({ setAuthForm }) {
             <input
               type="password"
               name="password"
-              ref={passwordRef}
               required
               placeholder="New password"
               defaultValue=""
-              onChange={() => setPasswordState(passwordRef.current.value)}
+              onChange={(e) => setPasswordState(e.target.value)}
             />
             <input
               type="password"
               name="confirmpassword"
-              ref={confirmPassRef}
               required
               placeholder="Confirm new password"
               defaultValue=""
-              onChange={() => setConfirmPassState(confirmPassRef.current.value)}
+              onChange={(e) => setConfirmPassState(e.target.value)}
             />
             <span>Enter OTP</span>
             <input

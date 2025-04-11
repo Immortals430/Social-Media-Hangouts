@@ -39,10 +39,9 @@ const userSlice = createSlice({
     },
     UPDATE_USER_TIMELINE: (state, action) => {
       const index = state.userTimeline.findIndex(
-        (post) => post._id === action.payload._id
+        (post) => post._id === action.payload.uniqueId
       );
-      delete action.payload.uniqueId;
-      state.userTimeline[index] = action.payload;
+      state.userTimeline[index] = action.payload.data;
     },
     DELETE_USER_TIMELINE_POST: (state, action) => {
       const index = state.userTimeline.findIndex(

@@ -80,17 +80,42 @@
   resize: none;
 }
 
+.create-post-textarea .shrink-area{
+  padding-right: 65px;
+}
+
 .create-post-textarea textarea::placeholder {
   color: $grey;
 }
 
-.create-post-textarea img {
+.textarea-dp {
   position: absolute;
   border-radius: 50%;
   width: 30px;
   height: 30px;
   left: 8px;
   top: 4px;
+}
+
+.create-post-textarea .thumbnail{
+  position: absolute;
+  max-width: 50px;
+  max-height: 60px;
+  right: 10px;
+  bottom: 10px;
+
+  img{
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+    max-height: inherit;
+  }
+  .delete{
+    position: absolute;
+    top: -10px;
+    right: -8px;
+    cursor: pointer;
+  }
 }
 
 .create-post-options {
@@ -156,8 +181,11 @@
   border-radius: 10px;
   padding: 24px;
   margin-bottom: 16px;
+  transition: all 1s ease;
 }
-
+.post-container.loader{
+  @include center;
+}
 .post-header {
   display: flex;
   gap: 12px;
@@ -178,14 +206,18 @@
   }
 }
 
-.postowner-logo div {
-  @include background;
-  // border-radius: 50%;
-  // width: 45px;
-  // height: 45px;
+.postowner-logo  {
   @include icons;
-  // background-color: rgb(8, 249, 249);
+  img{
+    @include icons;
+  }
 }
+
+.postowner-logo.loading{
+  background-color: lightgrey;
+}
+
+
 
 .postowner-name {
   flex: 1;
@@ -200,7 +232,18 @@
 
 .post-image {
   @include center;
-  margin-bottom: 16px;
+  margin-bottom: 30px;
+  height: 300px;
+  >img{
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+    height: 100%;
+  }
+}
+
+.post-image.loading{
+  background-color: lightgrey
 }
 
 .post-interacts {
@@ -262,7 +305,13 @@
 
 .commentor-logo {
   @include icons;
-  @include background;
+  img{
+    @include icons
+  }
+}
+
+.commentor-logo.loading{
+  background-color: lightgrey;
 }
 
 .comment-sec {
@@ -277,8 +326,14 @@ hr {
 }
 
 .commentowner-logo {
-  @include background;
   @include icons;
+  img{
+    @include icons;
+  }
+}
+
+.commentowner-logo.loading{
+  background-color: lightgrey;
 }
 
 .delete-comment {
@@ -305,46 +360,42 @@ hr {
   }
 }
 
+.comment-spinner {
+  @include center;
+}
 
-
-
-@media only screen and (max-width: 1000px){
-
-   .right-aside{
+@media only screen and (max-width: 1000px) {
+  .right-aside {
     display: none;
   }
 
-  .posts-main{
+  .posts-main {
     min-width: auto;
     margin-right: 0;
   }
 
-  .posts-main-container{
+  .posts-main-container {
     margin: 0;
     padding: 0;
     margin: auto;
-
-
   }
 }
 
-
-
-@media only screen and (max-width: 700px){
-  .create-post-options{
+@media only screen and (max-width: 700px) {
+  .create-post-options {
     flex-flow: column;
     padding: 0;
 
-    >div{
+    > div {
       justify-content: space-between;
       margin-bottom: 15px;
-      >div{
+      > div {
         width: calc(100% / 3);
       }
-      >div:first-child{
+      > div:first-child {
         justify-content: flex-start;
       }
-      >div:last-child{
+      > div:last-child {
         justify-content: flex-end;
       }
     }

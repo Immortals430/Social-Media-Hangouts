@@ -31,7 +31,7 @@ export default class UserController {
         password,
       });
 
-      await axios.post(`http://${process.env.MAIL_URL}/send-account-creation-link`, {
+      axios.post(`http://${process.env.MAIL_URL}/send-account-creation-link`, {
         email,
         userid,
         domain: process.env.SERVERURL,

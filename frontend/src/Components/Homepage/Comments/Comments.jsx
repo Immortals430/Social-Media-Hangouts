@@ -6,38 +6,41 @@ import {
   ADD_COMMENTS,
   createComment,
   deleteComment,
+  LOAD_COMMENTS,
   SET_COMMENTS,
 } from "../../../redux/reducers/comment_reducer";
 import { useEffect, useState } from "react";
-import {
-  commentsSelector,
-} from "../../../redux/reducers/comment_reducer";
+import { commentsSelector } from "../../../redux/reducers/comment_reducer";
 import { getCommentAPI } from "../../../api/api";
-import ScaleLoader from "react-spinners/ScaleLoader";
+import BeatLoader from "react-spinners/BeatLoader";
+import { removeSkeleton } from "../../../utility/removeSkeleton";
 
 export default function Comments({ postId }) {
   const { loggedUser } = useSelector(userSelector);
   const { comments } = useSelector(commentsSelector);
   const dispatch = useDispatch();
   const [dontFetch, setDontFetch] = useState(false);
-  const [commentPage, setCommentPage] = useState(1)
-  const [loading, setLoading] = useState(true)
+  const [commentPage, setCommentPage] = useState(1);
+  const [loading, setLoading] = useState(false);
+
 
   // create comment
   function callCreateComment(e) {
     e.preventDefault();
-    const content = e.target.comment.value
-    const uniqueId = Date.now()
-    dispatch(ADD_COMMENTS([{
-      _id: uniqueId,
-      content,
-      post: postId,
-      user: loggedUser
-    }]))
-    e.target.reset();
-    const obj = { content, postId }
-    dispatch(createComment({ obj, uniqueId }));
+    const content = e.target.comment.value;
+    const uniqueId = crypto.randomUUID();
 
+    dispatch(ADD_COMMENTS([{
+          _id: uniqueId,
+          content,
+          post: postId,
+          user: loggedUser,
+          temp: true
+        }])
+    );
+    e.target.reset();
+    const obj = { content, postId };
+    dispatch(createComment({ obj, uniqueId }));
   }
 
   // infinite reload comments
@@ -46,9 +49,9 @@ export default function Comments({ postId }) {
       if (!dontFetch) {
         const { data } = await getCommentAPI(commentPage, postId);
         if (data.length == 0) setDontFetch(true);
-        await dispatch(ADD_COMMENTS(data));
+        await dispatch(LOAD_COMMENTS(data));
       }
-      setLoading(false)
+      setLoading(false);
     };
     callGetCommentAPI();
   }, [commentPage]);
@@ -58,8 +61,8 @@ export default function Comments({ postId }) {
     const scrollTop = e.target.scrollTop;
     const clientHeight = e.target.clientHeight;
     if (scrollTop + clientHeight + 1 >= totalHeight) {
-      setLoading(true)
-      setCommentPage(prev => prev + 1)
+      setLoading(true);
+      setCommentPage(prev => prev + 1);
     }
   };
 
@@ -67,7 +70,7 @@ export default function Comments({ postId }) {
     const elem = document.querySelector(".comment-sec");
     elem.addEventListener("scroll", handleScroll);
     return () => {
-      dispatch(SET_COMMENTS([]))
+      dispatch(SET_COMMENTS([]));
       elem.removeEventListener("scroll", handleScroll);
     };
   }, []);
@@ -76,10 +79,9 @@ export default function Comments({ postId }) {
     <>
       <hr />
       <section className="create-comment-sec">
-        <div
-          className="commentor-logo"
-          style={{ backgroundImage: `url(${loggedUser.avatarUrl})` }}
-        ></div>
+        <div className="loading commentor-logo">
+          <img src={loggedUser.avatarUrl} onLoad={removeSkeleton} alt="logo" />
+        </div>
         <form onSubmit={(e) => callCreateComment(e)}>
           <textarea
             rows="4"
@@ -96,9 +98,13 @@ export default function Comments({ postId }) {
         {comments.map((comment) => (
           <div className="comment-container" key={comment._id}>
             <div
-              className="commentowner-logo"
-              style={{ backgroundImage: `url(${comment.user.avatarUrl})` }}
-            ></div>
+              className="loading commentowner-logo"
+            >
+              <img
+                src={comment.user.avatarUrl}
+                onLoad={removeSkeleton}
+              />
+            </div>
             <div className="comment-content">
               <h3>{comment.user.username}</h3>
               <div>{comment.content}</div>
@@ -108,15 +114,16 @@ export default function Comments({ postId }) {
                 <RxCross2
                   size={16}
                   color="#a2a2a2"
-                  onClick={() => dispatch(deleteComment(comment._id))}
+                  onClick={() => {!comment.temp && dispatch(deleteComment(comment._id))}}
                 />
               </div>
             )}
           </div>
         ))}
+
         {loading && (
-          <div className=" loading">
-            <ScaleLoader color="#0055ff" />
+          <div className="loading">
+            <BeatLoader className="comment-spinner" color="#0055ff" />
           </div>
         )}
       </section>

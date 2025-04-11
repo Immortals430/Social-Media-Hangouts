@@ -8,8 +8,11 @@ import {
   SET_USER,
   setSeen,
 } from "../../redux/reducers/chat_reducer";
+import { memo } from "react";
+import { removeSkeleton } from "../../utility/removeSkeleton";
 
-export default function AsideRight() {
+
+function AsideRight() {
   const { friends } = useSelector(friendsSelector);
   const { user, unreadMsg } = useSelector(chatSelector);
   const { onlineUsers } = useSelector(chatSelector);
@@ -30,10 +33,9 @@ export default function AsideRight() {
           <div>
             {friends.map(({ friend }) => (
               <div key={friend._id} onClick={() => callStartChat(friend)}>
-                <div
-                  className="logo"
-                  style={{ backgroundImage: `url(${friend.avatarUrl})` }}
-                ></div>
+                <div className="logo loading">
+                  <img src={friend.avatarUrl} alt="logo" onLoad={removeSkeleton} />
+                </div>
                 <span className="name">{friend.username}</span>
                 {user._id == friend._id ||
                 !unreadMsg.includes(friend._id) ? null : (
@@ -68,73 +70,11 @@ export default function AsideRight() {
               <span className="name">Linked In</span>
               <span className="online-logo"></span>
             </div>
-
-            <div>
-              <div className="logo">
-                <div></div>
-              </div>
-              <span className="name">Linked In</span>
-              <span className="online-logo"></span>
-            </div>
-
-            <div>
-              <div className="logo">
-                <div></div>
-              </div>
-              <span className="name">Linked In</span>
-              <span className="online-logo"></span>
-            </div>
-
-            <div>
-              <div className="logo">
-                <div></div>
-              </div>
-              <span className="name">Linked In</span>
-              <span className="online-logo"></span>
-            </div>
-
-            <div>
-              <div className="logo">
-                <div></div>
-              </div>
-              <span className="name">Linked In</span>
-              <span className="online-logo"></span>
-            </div>
-
-            <div>
-              <div className="logo">
-                <div></div>
-              </div>
-              <span className="name">Linked In</span>
-              <span className="online-logo"></span>
-            </div>
-
-            <div>
-              <div className="logo">
-                <div></div>
-              </div>
-              <span className="name">Linked In</span>
-              <span className="online-logo"></span>
-            </div>
-
-            <div>
-              <div className="logo">
-                <div></div>
-              </div>
-              <span className="name">Linked In</span>
-              <span className="online-logo"></span>
-            </div>
-
-            <div>
-              <div className="logo">
-                <div></div>
-              </div>
-              <span className="name">Linked In</span>
-              <span className="online-logo"></span>
-            </div>
           </div> */}
         </section>
       </div>
     </aside>
   );
 }
+
+export default memo(AsideRight);

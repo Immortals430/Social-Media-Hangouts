@@ -4,13 +4,16 @@ import {
   deleteCommentAPI,
   getCommentAPI,
 } from "../../api/api";
+import { connect } from "react-redux";
 
 const initialState = {
   comments: [],
+  commentPage: 1,
+  dontFetchComment: false,
 };
 
 const commentSlice = createSlice({
-  name: "friends",
+  name: "comments",
   initialState,
   reducers: {
     SET_COMMENTS: (state, action) => {
@@ -19,12 +22,14 @@ const commentSlice = createSlice({
     ADD_COMMENTS: (state, action) => {
       state.comments = [...action.payload, ...state.comments];
     },
+    LOAD_COMMENTS: (state, action) => {
+      state.comments = [...state.comments, ...action.payload];
+    },
     UPDATE_COMMENTS: (state, action) => {
       const index = state.comments.findIndex(
         (comment) => comment._id === action.payload.uniqueId
       );
-      delete action.payload.uniqueId;
-      state.comments[index] = action.payload;
+      state.comments[index] = action.payload.data;
     },
     DELETE_COMMENTS: (state, action) => {
       const index = state.comments.findIndex(
@@ -56,8 +61,8 @@ export const createComment = createAsyncThunk(
       const { data } = await createCommentAPI(args.obj.postId, {
         content: args.obj.content,
       });
-      data.uniqueId = args.uniqueId;
-      dispatch(UPDATE_COMMENTS(data));
+      // data.uniqueId = args.uniqueId;
+      dispatch(UPDATE_COMMENTS({data, uniqueId: args.uniqueId}));
     } catch (err) {
       console.log(err);
     }
@@ -78,6 +83,11 @@ export const deleteComment = createAsyncThunk(
 );
 
 export const commentsReducer = commentSlice.reducer;
-export const { SET_COMMENTS, ADD_COMMENTS, UPDATE_COMMENTS, DELETE_COMMENTS } =
-  commentSlice.actions;
+export const {
+  SET_COMMENTS,
+  ADD_COMMENTS,
+  LOAD_COMMENTS,
+  UPDATE_COMMENTS,
+  DELETE_COMMENTS
+} = commentSlice.actions;
 export const commentsSelector = (state) => state.commentsReducer;

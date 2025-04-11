@@ -1,7 +1,6 @@
 import React from "react";
 import { userSelector, logout } from "../../redux/reducers/user_reducer";
-import { useDispatch, useSelector } from "react-redux";
-import { FaUserCircle } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux"; 
 import { IoLogOutSharp } from "react-icons/io5";
 import { FiSettings } from "react-icons/fi";
 import { FiHome, FiUsers } from "react-icons/fi";
@@ -17,16 +16,18 @@ import { SiYoutubeshorts } from "react-icons/si";
 
 export default function Aside_M({ mobileAside, setMobileAside }) {
   const { loggedUser } = useSelector(userSelector);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   return (
     <main className={`aside-m ${mobileAside && "active"}`}>
       <div>
-        <Link to={`/profile/${loggedUser._id}`} onClick={() => setMobileAside(false)}>
+        <Link
+          to={`/profile/${loggedUser._id}`}
+          onClick={() => setMobileAside(false)}
+        >
           <div>
-            <span
-              className="profile"
-              style={{ backgroundImage: `url(${loggedUser.avatarUrl})` }}
-            ></span>
+            <span className="profile">
+              <img src={loggedUser.avatarUrl} alt="logo" />
+            </span>
             <span>Profile</span>
           </div>
         </Link>

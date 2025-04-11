@@ -22,11 +22,11 @@ let userSchema = new Schema(
     },
     avatar: {
       type: String,
-      default: "image-user.svg",
+      default: "image-user.jpg",
     },
     avatarUrl: {
       type: String,
-      default: "https://firebasestorage.googleapis.com/v0/b/hangouts-41e52.appspot.com/o/avatar%2Favatar-user.svg?alt=media&token=d2342dff-a86b-4b3b-9f79-d1a3b7888e31"
+      default: "https://firebasestorage.googleapis.com/v0/b/hangouts-41e52.appspot.com/o/avatar%2Fimage-user.jpg?alt=media&token=a27415bd-57f2-4522-a100-676301952c90"
     },
     status: {
       type: String,

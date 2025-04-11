@@ -1,4 +1,3 @@
-import { FaSearch } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import {
   friendsSelector,
@@ -6,6 +5,7 @@ import {
   toggleFrndReq,
 } from "../../redux/reducers/friend_reducer";
 import { Link } from "react-router-dom";
+import { removeSkeleton } from "../../utility/removeSkeleton";
 
 export default function FindFriend() {
   const { friendReqsRec, friendSuggestions } = useSelector(friendsSelector);
@@ -42,11 +42,15 @@ export default function FindFriend() {
             {friendReqsRec.map(({ user }) => (
               <Link to={`/profile/${user._id}`} key={user._id}>
                 <div className="user-card">
-                  <img src={user.avatarUrl} alt="" className="user-image" />
-                  {/* <div
-                  className="user-image"
-                  style={{ backgroundImage: `url(${user.avatarUrl})`, height: "208px" }}
-                ></div> */}
+                  <div className="user-image-container loading">
+                    <img
+                      src={user.avatarUrl}
+                      alt={user.username}
+                      className="user-image"
+                      onLoad={removeSkeleton}
+                    />
+                  </div>
+
                   <div className="details">
                     <h3>{user.username}</h3>
                     <div
@@ -79,11 +83,14 @@ export default function FindFriend() {
             {friendSuggestions.map((user) => (
               <Link to={`/profile/${user._id}`} key={user._id}>
                 <div className="user-card">
-                  <img src={user.avatarUrl} alt="" className="user-image" />
-                  {/* <div
-                  className="user-image"
-                  style={{ backgroundImage: `url(${user.avatarUrl})` }}
-                ></div> */}
+                  <div className="user-image-container loading">
+                    <img
+                      src={user.avatarUrl}
+                      alt={user.username}
+                      className="user-image"
+                      onLoad={removeSkeleton}
+                    />
+                  </div>
                   <div className="details">
                     <h3>{user.username}</h3>
                     {!user.reqSent ? (

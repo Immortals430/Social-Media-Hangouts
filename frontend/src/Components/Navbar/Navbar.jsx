@@ -4,29 +4,16 @@ import { HiOutlineUserGroup } from "react-icons/hi2";
 import { MdOutlineLocalGroceryStore } from "react-icons/md";
 import { FaRegBell } from "react-icons/fa";
 import { FaRegMessage } from "react-icons/fa6";
-import { FaUserCircle } from "react-icons/fa";
 import { Link, useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { userSelector } from "../../redux/reducers/user_reducer";
 import Hamburger from "hamburger-react";
+import { removeSkeleton } from "../../utility/removeSkeleton";
+
 
 export default function Navbar({ mobileAside, setMobileAside }) {
-  let { loggedUser } = useSelector(userSelector);
-  let { pathname } = useLocation();
-  const [path, setPath] = useState("");
-
-  useEffect(() => {
-    const path = pathname.split("/")[1];
-    setPath(path);
-  }, [pathname]);
-
-  const activeLink = () => {
-    return {
-      color: "#0055ff",
-      backgroundColor: "#d0e4ff",
-    };
-  };
+  const { loggedUser } = useSelector(userSelector);
+  const { pathname } = useLocation();
 
   return (
     <nav>
@@ -35,26 +22,25 @@ export default function Navbar({ mobileAside, setMobileAside }) {
         <Link to="/">Hangouts</Link>
       </h1>
       <div className="nav-mid-container">
-        <Link to="/" style={path === "" ? activeLink() : null}>
+        <Link to="/" className={`${pathname == "/" ? "active" : null}`}>
           <FiHome size={25} />
         </Link>
         <Link
           to="/find-friend"
-          style={path === "find-friend" ? activeLink() : null}
+          className={`${pathname == "/find-friend" ? "active" : null}`}
         >
           <FiUsers size={25} />
         </Link>
-        <Link style={path == "/" ? activeLink() : null} className="store">
+        <Link className="store">
           <MdOutlineLocalGroceryStore size={25} />
         </Link>
         <Link
           to={"/chatlist"}
-          style={path == "/chatlist" ? activeLink() : null}
-          className="chats"
+          className={`${pathname == "/chatlist" ? "active" : null} chats`}
         >
           <FaRegMessage size={25} />
         </Link>
-        <Link style={path == "/" ? activeLink() : null}>
+        <Link>
           <HiOutlineUserGroup size={25} />
         </Link>
       </div>
@@ -68,11 +54,9 @@ export default function Navbar({ mobileAside, setMobileAside }) {
           </Link>
         </div>
         <Link to={`/profile/${loggedUser._id}`}>
-          <div
-            className="nav-profile"
-            style={{ backgroundImage: `url(${loggedUser.avatarUrl})` }}
-          ></div>
-          {/* <FaUserCircle size={25} /> */}
+          <div className={"nav-profile loading"}>
+            <img src={loggedUser.avatarUrl} onLoad={removeSkeleton} alt="logo" />
+          </div>
         </Link>
         <div className="nav-burger-menu">
           <span>

@@ -1,33 +1,22 @@
 import { IoShareSocial } from "react-icons/io5";
-import banner from "../../assets/banner.jpg";
 import { useEffect, useState } from "react";
 import { userSelector } from "../../redux/reducers/user_reducer";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { SET_PATH } from "../../redux/reducers/navigation_reducer";
 import Signup from "./Signup";
 import Signin from "./Signin";
 import ForgortPassword from "./ForgortPassword";
 
-
-export default function AuthPage() {
-
-
+function AuthPage() {
   const [authForm, setAuthForm] = useState("login");
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const { loggedUser} = useSelector(userSelector)
-
+  const navigate = useNavigate();
+  const { loggedUser } = useSelector(userSelector);
 
   // navigate to homepage if authenticated on initial render
-  useEffect(() => {  
-    if(loggedUser._id) {
-      navigate('/')
-      dispatch(SET_PATH('home'))
-    }
-  }, [loggedUser])
+  useEffect(() => {
+    if (loggedUser._id) navigate("/");
+  }, [loggedUser]);
 
-  
   return (
     <>
       <nav className="auth-nav">
@@ -51,18 +40,22 @@ export default function AuthPage() {
       <div className="auth-container">
         <div
           className="banner"
-          style={{ backgroundImage: `url(${banner})` }}
+          style={{ backgroundImage: `url("/banner.webp")` }}
         ></div>
-
+       
         {authForm == "register" ? (
-          <Signup setAuthForm={setAuthForm}/>
-        ) :
-        authForm == "forgot-pass" ? (
-          <ForgortPassword setAuthForm={setAuthForm}/>
+       
+            <Signup setAuthForm={setAuthForm} />
+          
+        ) : authForm == "forgot-pass" ? (
+          <ForgortPassword setAuthForm={setAuthForm} />
         ) : (
-          <Signin setAuthForm={setAuthForm}/>
+          <Signin setAuthForm={setAuthForm} />
         )}
+
       </div>
     </>
   );
 }
+
+export default AuthPage;

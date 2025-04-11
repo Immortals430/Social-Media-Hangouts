@@ -1,4 +1,5 @@
 import { LuVideo, LuImage, LuCamera } from "react-icons/lu";
+import { TiDelete } from "react-icons/ti";
 import { AiOutlineEdit } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -9,33 +10,42 @@ import {
 import { ADD_POST, UPDATE_POST } from "../../../redux/reducers/post_reducer";
 import { useParams } from "react-router-dom";
 import { createPostAPI } from "../../../api/api";
+import { useState } from "react";
 
 export default function CreatePost() {
   const { loggedUser } = useSelector(userSelector);
   const dispatch = useDispatch();
   const { id } = useParams();
+  const [imageInput, setImageInput] = useState(null);
 
   // create posts
   async function callCreatePost(e) {
     e.preventDefault();
     const caption = e.target.content.value;
-    const image = e.target.image.files[0] || null;
-    const uniqueId = Date.now()
-    const obj = { caption, image }
+    const image = imageInput;
+    const uniqueId = crypto.randomUUID();
+    const obj = { caption, image };
+
     const post = {
       caption,
       likeCount: 0,
-      uploader: loggedUser,
-      url: image && "loading",
-      _id: uniqueId
+      uploader: {...loggedUser, avatarUrl: " "},
+      url: " " || null,
+      _id: uniqueId,
+      temp: true,
+    };
+
+
+    if (caption || image) {
+      if (id) await dispatch(ADD_USER_TIMELINE_POST([post]));
+      if (!id) await dispatch(ADD_POST([post]));
+      e.target.reset();
+      setImageInput(null)
+      const { data } = await createPostAPI(obj);
+
+      if (id) dispatch(UPDATE_USER_TIMELINE(data, uniqueId));
+      if (!id) dispatch(UPDATE_POST({ data, uniqueId }));
     }
-    if(id) await dispatch(ADD_USER_TIMELINE_POST([post]))
-    if(!id) await dispatch(ADD_POST([post]))
-    e.target.reset();
-    const { data } = await createPostAPI(obj);
-    data.uniqueId = uniqueId
-    if(id) dispatch(UPDATE_USER_TIMELINE(data));
-    if(!id) dispatch(UPDATE_POST(data));
   }
   return (
     <section className="create-post-sec">
@@ -50,8 +60,21 @@ export default function CreatePost() {
           <textarea
             placeholder="Whats's on your mind?"
             name="content"
+            className={imageInput && "shrink-area"}
           ></textarea>
-          <img src={loggedUser.avatarUrl} />
+          <img src={loggedUser.avatarUrl} className="textarea-dp" />
+
+          {imageInput && (
+            <div className="thumbnail">
+              <TiDelete
+                className="delete"
+                color="#e50000"
+                size={20}
+                onClick={() => setImageInput(null)}
+              />
+              <img src={URL.createObjectURL(imageInput)} />
+            </div>
+          )}
         </div>
 
         <div className="create-post-options">
@@ -63,7 +86,12 @@ export default function CreatePost() {
             </div>
             <div>
               <label>
-                <input type="file" name="image" accept="image/jpeg, image/png" />
+                <input
+                  type="file"
+                  name="image"
+                  accept="image/jpeg, image/png"
+                  onInput={(e) => setImageInput(e.target.files[0])}
+                />
                 Select file
               </label>
               <LuImage color="#12d877" size={22} />

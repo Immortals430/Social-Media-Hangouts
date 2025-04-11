@@ -10,10 +10,25 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     justify-content: center;
-    gap: 40px;
+    gap: 20px;
     padding: 0 20px;
     >*{
-      margin:auto
+      margin:auto;
+    }
+    .loading-skeleton{
+      width: 100%;
+      height: 20px;
+      margin-bottom: 20px;
+      background-color: lightgrey;
+    }
+
+    .loading-skeleton.round{
+      border-radius: 50%;
+      width: 110px;
+      margin: auto;
+      margin-bottom: 25px;
+      height: 110px;
+
     }
   }
 }
@@ -55,29 +70,35 @@
 
 .user-card {
   $margin-side: 3px;
-  display: inline-block;
   background-color: $white;
   border-radius: 10px;
   margin: 6px $margin-side;
-  // position: relative;
-  // height: 285px;
+  min-height: 255px;
+  width: 100%;
+
   padding: 20px;
+  .user-image-container{
+    border-radius: 50%;
 
-
-  > .user-image{
+    width: 50%;
+    margin: auto;
+    margin-bottom: 10px;
     cursor: pointer;
+    height: 110px;
+  }
+
+  .user-image-container.loading{
+    background-color: lightgrey;
   }
 
   .user-image {
-    // @include background;
-    // width: calc(990px / 5 - ($margin-side * 2));
-    width: 50%;
-    // height: 250px;
     border-radius: 50%;
-    margin: auto;
-    margin-bottom: 10px;
-    display: block;
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+    height: 100%;
   }
+
 
   .details {
     // position: absolute;
@@ -102,16 +123,19 @@
     .accept-btn {
       background-color: $theme;
       cursor: pointer;
+      width: 230px;
     }
 
     .send-req-btn {
       background-color: #10d876;
       cursor: pointer;
+      width: 230px;
     }
 
     .reject-btn {
       background-color: red;
       cursor: pointer;
+      width: 230px;
     }
   }
 }

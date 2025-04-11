@@ -1,3 +1,4 @@
+
 @mixin aside-icons {
   @include icons;
   margin-right: 16px;
@@ -59,10 +60,25 @@
   cursor: pointer;
 }
 
-.aside-main-sec .profile, .aside-m .profile {
+.aside-main-sec  .aside-m .profile {
   @include aside-icons;
   @include background;
   color: $theme;
+}
+
+.profile{
+  @include aside-icons;
+  >img{
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+  }
+}
+
+.profile.loading{
+  background-color: lightgrey;
 }
 
 .aside-main-sec .home,
@@ -179,7 +195,18 @@ aside-author-sec span {
   @include icons;
   width: 35px;
   height: 35px;
-  @include background;
+  // @include background;
+  >img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+  }
+}
+
+.logo.loading{
+  background-color: lightgrey;
 }
 
 .name {

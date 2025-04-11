@@ -6,7 +6,6 @@ import {
   ADD_CHAT,
   RESET_CHAT,
   SET_USER,
-
 } from "../../redux/reducers/chat_reducer";
 import { socket } from "../../config/socket";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,6 +14,7 @@ import { userSelector } from "../../redux/reducers/user_reducer";
 import { useEffect } from "react";
 import { fetchChatstAPI } from "../../api/api";
 import { Link } from "react-router-dom";
+import { removeSkeleton } from "../../utility/removeSkeleton";
 
 export default function Chatbox() {
   const dispatch = useDispatch();
@@ -32,18 +32,17 @@ export default function Chatbox() {
         if (data.length == 0) setDontFetch(true);
         await dispatch(SET_CHAT_HISTORY(data));
       }
-      setLoading(false)
+      setLoading(false);
     };
     callGetChastAPI();
   }, [chatPage, user._id]);
 
-  
   const handleScroll = async (e) => {
     const totalHeight = e.target.scrollHeight;
     const scrollTop = e.target.scrollTop;
     const clientHeight = e.target.clientHeight;
     if (scrollTop - clientHeight - 1 <= -totalHeight) {
-      setLoading(true)
+      setLoading(true);
       setChatPage((prev) => prev + 1);
     }
   };
@@ -52,7 +51,7 @@ export default function Chatbox() {
     const elem = document.querySelector(".msg-container");
     elem.addEventListener("scroll", handleScroll);
     return () => {
-      dispatch(RESET_CHAT(user._id))
+      dispatch(RESET_CHAT(user._id));
       elem.removeEventListener("scroll", handleScroll);
     };
   }, []);
@@ -69,10 +68,9 @@ export default function Chatbox() {
   return (
     <section className="chats-container">
       <div className="msg-head">
-        <div
-          className="msg-head-dp"
-          style={{ backgroundImage: `url(${user.avatarUrl})` }}
-        ></div>
+        <div className="msg-head-dp loading">
+          <img src={user.avatarUrl} alt="logo" onLoad={removeSkeleton} />
+        </div>
         <h3 className="msg-head-name">
           <Link to={`/profile/${user._id}`}>{user.username}</Link>
         </h3>

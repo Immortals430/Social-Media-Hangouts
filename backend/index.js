@@ -12,12 +12,12 @@ import cookieParser from "cookie-parser";
 import { jwtAuth } from "./src/middlewares/jwt_middleware.js";
 import { chatRouter } from "./src/features/chat/chat_route.js";
 import "./src/config/firebase.js";
-const port = process.env.PORT;
+const PORT = process.env.PORT || 8000;
 const app = express();
 
 
 app.use(cors({
-  origin: process.env.CLIENT,
+  origin: process.env.CLIENT || "*",
   credentials: true,
   methods: 'GET,OPTIONS,PATCH,DELETE,POST,PUT',
   allowedHeaders: 'X-CSRF-Token, X-Requested-With, Accept, Content-Type, Authorization'
@@ -29,14 +29,8 @@ app.use(express.json());
 app.use(express.static("uploads"));
 
 
-
-
-app.get("/", (req, res) => res.end("Bravo"));
-
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/post", jwtAuth, postRouter);
-
-
 app.use("/api/v1/friendship", jwtAuth, friendshipRouter);
 app.use("/api/v1/comment", jwtAuth, commentRouter);
 app.use("/api/v1/like", jwtAuth, likeRouter);
@@ -47,6 +41,6 @@ app.use(errorhandler)
 app.use((req, res) => res.send("wrong api"));
 
 connectDb();
-app.listen(port, (err) => {
+app.listen(PORT, (err) => {
   console.log(err || `Connected to Server`);
 });

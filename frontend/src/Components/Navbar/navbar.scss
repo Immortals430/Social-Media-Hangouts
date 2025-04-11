@@ -33,6 +33,10 @@ nav * {
 }
 
 .nav-mid-container {
+  >a.active{
+    color: #0055ff;
+    background-color: #d0e4ff;
+  }
   .chats{
     display: none;
   }
@@ -43,11 +47,18 @@ nav * {
 .nav-right-container {
   min-width: 130px;
   .nav-profile {
-    @include background;
     @include icons;
     width: 35px;
     height: 35px;
     cursor: pointer;
+    img{
+      @include icons;
+      width: 35px;
+      height: 35px;
+    }
+  }
+  .nav-profile.loading{
+    background-color: lightgrey;
   }
   > div {
     color: $theme;

@@ -31,7 +31,8 @@ export default function Timeline() {
   const [postPage, setPostPage] = useState(1);
   const [dontFetch, setDontFetch] = useState(false);
   const [loadPost, setLoadPost] = useState(true);
-  const [initialRender, setInitialRender] = useState(true)
+  const [initialRender, setInitialRender] = useState(true);
+  const [dpLoaded, setDpLoaded] = useState([]);
 
   // like post
   async function callLike(postId) {
@@ -46,15 +47,14 @@ export default function Timeline() {
     dispatch(deletePost(postId));
   }
 
-
   useEffect(() => {
     const reset = async () => {
       await dispatch(SET_USER_PROFILE({}));
       await dispatch(SET_USER_TIMELINE([]));
       setLoading(true);
       setDontFetch(false);
-      if(!initialRender && postPage == 1) setLoadPost(prev=>!prev)  
-      else if(!initialRender) setPostPage(1)
+      if (!initialRender && postPage == 1) setLoadPost((prev) => !prev);
+      else if (!initialRender) setPostPage(1);
     };
     reset();
   }, [id]);
@@ -83,7 +83,7 @@ export default function Timeline() {
   };
 
   useEffect(() => {
-    setInitialRender(false)
+    setInitialRender(false);
     const elem = document.querySelector(".profile-main");
     elem.addEventListener("scroll", handleScroll);
     return () => {
@@ -98,10 +98,17 @@ export default function Timeline() {
       {userTimeline.map((post, i) => (
         <div className="post-container" key={i}>
           <div className="post-header">
-            <div className="postowner-logo">
-              <div
-                style={{ backgroundImage: `url(${post.uploader.avatarUrl})` }}
-              ></div>
+            <div
+              className={`${
+                dpLoaded.includes(post._id) && "img-loaded"
+              } postowner-logo`}
+            >
+
+              <img
+                src={post.uploader.avatarUrl}
+                alt=""
+                onLoad={() => setDpLoaded((prev) => [...prev, post._id])}
+              />
             </div>
             <div className="postowner-name">
               <h4>{post.uploader.username}</h4>

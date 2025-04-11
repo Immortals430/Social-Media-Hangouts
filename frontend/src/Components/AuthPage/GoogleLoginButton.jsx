@@ -2,10 +2,10 @@ import { FaGoogle } from "react-icons/fa";
 import { useGoogleLogin } from "@react-oauth/google";
 import { useDispatch } from "react-redux";
 import { googleLogin } from "../../redux/reducers/user_reducer";
-import { useState } from "react";
+import { memo, useState } from "react";
 import MoonLoader from "react-spinners/MoonLoader";
 
-export function GoogleLoginButton() {
+function GoogleLoginButton() {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState();
 
@@ -28,3 +28,6 @@ export function GoogleLoginButton() {
     </button>
   );
 }
+
+
+export default memo(GoogleLoginButton)

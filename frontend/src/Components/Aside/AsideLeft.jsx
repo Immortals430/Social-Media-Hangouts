@@ -6,55 +6,56 @@ import { FaGithub } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout, userSelector } from "../../redux/reducers/user_reducer";
-import { FaUserCircle } from "react-icons/fa";
 import { IoLogOutSharp } from "react-icons/io5";
 import { FiSettings } from "react-icons/fi";
+import { removeSkeleton } from "../../utility/removeSkeleton";
+
 
 export default function AsideLeft({ mobileAside, setMobileAside }) {
   const { loggedUser } = useSelector(userSelector);
   const dispatch = useDispatch();
 
+
   return (
     <aside className={`left-aside ${mobileAside && "active"}`}>
       <section className="aside-main-sec">
-        <Link to={`/profile/${loggedUser._id}`} className="profile-wrapper" onClick={()=> setMobileAside(false)}>
-          <span
-            className="profile"
-            style={{ backgroundImage: `url(${loggedUser.avatarUrl})` }}
-          ></span>
+        <Link
+          to={`/profile/${loggedUser._id}`}
+          className="profile-wrapper"
+          onClick={() => setMobileAside(false)}
+        >
+          <span className="profile loading">
+            <img src={loggedUser.avatarUrl} onLoad={removeSkeleton} alt="logo" />
+          </span>
           <span>{loggedUser.username}</span>
         </Link>
-        {/* <div> */}
-        <Link to="/" onClick={()=> setMobileAside(false)}>
+
+
+        <Link to="/" onClick={() => setMobileAside(false)}>
           <span className="home">
             <FiHome size={20} />
           </span>
           <span>Newsfeed</span>
         </Link>
-        {/* </div> */}
-        {/* <div> */}
-        <Link to="/find-friend" onClick={()=> setMobileAside(false)}>
+
+        <Link to="/find-friend" onClick={() => setMobileAside(false)}>
           <span className="users">
             <FiUsers size={20} />
           </span>
           <span>Find Friends</span>
         </Link>
-        {/* </div> */}
+
         <div>
-          {/* <Link> */}
           <span className="groups">
             <HiOutlineUserGroup size={20} />
           </span>
           <span>Groups</span>
-          {/* </Link> */}
         </div>
         <div>
-          {/* <Link> */}
           <span className="store">
             <MdOutlineLocalGroceryStore size={20} />
           </span>
           <span>Nearby Store</span>
-          {/* </Link> */}
         </div>
       </section>
       <section className="aside-author-sec">
@@ -84,7 +85,7 @@ export default function AsideLeft({ mobileAside, setMobileAside }) {
         </div>
       </section>
       <section className="aside-extra-sec">
-        <Link to="/settings" onClick={()=> setMobileAside(false)}>
+        <Link to="/settings" onClick={() => setMobileAside(false)}>
           <span className="setting">
             <FiSettings size={28} />
           </span>

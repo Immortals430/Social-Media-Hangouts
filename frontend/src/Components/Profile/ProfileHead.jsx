@@ -13,7 +13,7 @@ import {
   setSeen,
 } from "../../redux/reducers/chat_reducer";
 
-export default function ProfileHead({setActiveComp}) {
+export default function ProfileHead({ setActiveComp }) {
   const { loggedUser, profileUser } = useSelector(userSelector);
   const dispatch = useDispatch();
   const { friends, friendReqsRec } = useSelector(friendsSelector);
@@ -118,11 +118,13 @@ export default function ProfileHead({setActiveComp}) {
               opacity: loading == "cover" ? 0.5 : 1,
             }}
           >
-            <input
-              type="file"
-              ref={coverPicRef}
-              onChange={(e) => callUpdateProfile(e, "cover")}
-            />
+            {loggedUser._id == id ? (
+              <input
+                type="file"
+                ref={coverPicRef}
+                onChange={(e) => callUpdateProfile(e, "cover")}
+              />
+            ) : null}
           </div>
           <div className="user-details">
             <div
@@ -136,17 +138,18 @@ export default function ProfileHead({setActiveComp}) {
                 opacity: loading == "avatar" ? 0.5 : 1,
               }}
             >
-              <input
-                type="file"
-                ref={profileDpRef}
-                onChange={(e) => callUpdateProfile(e, "avatar")}
-              />
+              {loggedUser._id == id ? (
+                <input
+                  type="file"
+                  ref={profileDpRef}
+                  onChange={(e) => callUpdateProfile(e, "avatar")}
+                />
+              ) : null}
             </div>
             <div className="profilename">
               <h4>{profileUser.username}</h4>
             </div>
             <div className="connects-container">
- 
               {loggedUser._id == profileUser._id
                 ? null
                 : profileBtnOptions(profileUser)}
@@ -157,7 +160,9 @@ export default function ProfileHead({setActiveComp}) {
           <div onClick={() => setActiveComp("about")}>About</div>
           <div onClick={() => setActiveComp("friends")}>Friends</div>
           <div onClick={() => setActiveComp("photos")}>Photos</div>
-          <div onClick={() => setActiveComp("posts-main-container")}>Timeline</div>
+          <div onClick={() => setActiveComp("posts-main-container")}>
+            Timeline
+          </div>
         </div>
       </header>
     </div>

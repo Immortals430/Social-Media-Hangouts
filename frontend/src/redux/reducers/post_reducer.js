@@ -3,6 +3,8 @@ import { deletePostAPI, toggleLikeAPI } from "../../api/api";
 
 const initialState = {
   posts: [],
+  postPage: 1,
+  dontFetchPost: false,
 };
 
 const postSlice = createSlice({
@@ -20,16 +22,21 @@ const postSlice = createSlice({
     },
     UPDATE_POST: (state, action) => {
       const index = state.posts.findIndex(
-        (post) => post._id === action.payload._id
+        (post) => post._id === action.payload.uniqueId
       );
-      delete action.payload.uniqueId;
-      state.posts[index] = action.payload;
+      state.posts[index] = action.payload.data;
     },
     DELETE_POST: (state, action) => {
       const index = state.posts.findIndex(
         (post) => post._id === action.payload
       );
       state.posts.splice(index, 1);
+    },
+    INCREASE_POST_PAGE: (state) => {
+      state.postPage = state.postPage + 1;
+    },
+    DONT_FETCH_POST: (state) => {
+      state.dontFetchPost = true;
     },
   },
 });
@@ -62,6 +69,13 @@ export const deletePost = createAsyncThunk(
 );
 
 export const postReducer = postSlice.reducer;
-export const { SET_POST, ADD_POST, LOAD_POST, UPDATE_POST, DELETE_POST } =
-  postSlice.actions;
+export const {
+  SET_POST,
+  ADD_POST,
+  LOAD_POST,
+  UPDATE_POST,
+  DELETE_POST,
+  INCREASE_POST_PAGE,
+  DONT_FETCH_POST,
+} = postSlice.actions;
 export const postSelector = (state) => state.postReducer;

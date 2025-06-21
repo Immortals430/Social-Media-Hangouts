@@ -11,18 +11,19 @@ import { ADD_POST, UPDATE_POST } from "../../../redux/reducers/post_reducer";
 import { useParams } from "react-router-dom";
 import { createPostAPI } from "../../../api/api";
 import { useState } from "react";
+import "../homepage.scss"
 
 export default function CreatePost() {
   const { loggedUser } = useSelector(userSelector);
   const dispatch = useDispatch();
   const { id } = useParams();
-  const [imageInput, setImageInput] = useState(null);
+  const [fileInput, setFileInput] = useState(null);
 
   // create posts
   async function callCreatePost(e) {
     e.preventDefault();
     const caption = e.target.content.value;
-    const image = imageInput;
+    const image = fileInput;
     const uniqueId = crypto.randomUUID();
     const obj = { caption, image };
 
@@ -35,12 +36,16 @@ export default function CreatePost() {
       temp: true,
     };
 
-
+    if(image?.size > 5242880){
+      window.alert("File size should be less than 5MB")
+      return
+    }
+    console.log("post")
     if (caption || image) {
       if (id) await dispatch(ADD_USER_TIMELINE_POST([post]));
       if (!id) await dispatch(ADD_POST([post]));
       e.target.reset();
-      setImageInput(null)
+      setFileInput(null)
       const { data } = await createPostAPI(obj);
 
       if (id) dispatch(UPDATE_USER_TIMELINE(data, uniqueId));
@@ -60,19 +65,19 @@ export default function CreatePost() {
           <textarea
             placeholder="Whats's on your mind?"
             name="content"
-            className={imageInput && "shrink-area"}
+            className={fileInput && "shrink-area"}
           ></textarea>
-          <img src={loggedUser.avatarUrl} className="textarea-dp" />
+          <img src={loggedUser.avatarUrl} className="textarea-dp" alt="" />
 
-          {imageInput && (
+          {fileInput && (
             <div className="thumbnail">
               <TiDelete
                 className="delete"
                 color="#e50000"
                 size={20}
-                onClick={() => setImageInput(null)}
+                onClick={() => setFileInput(null)}
               />
-              <img src={URL.createObjectURL(imageInput)} />
+              <img src={URL.createObjectURL(fileInput)} />
             </div>
           )}
         </div>
@@ -80,7 +85,7 @@ export default function CreatePost() {
         <div className="create-post-options">
           <div>
             <div>
-              {/* <input type="file"  accept="video/mp4, video/webm" /> */}
+              <input type="file"  accept="video/mp4, video/webm"  onInput={(e) => setFileInput(e.target.files[0])} />
               <LuVideo color="#e71717" size={22} />
               &nbsp;&nbsp;Video
             </div>
@@ -90,7 +95,7 @@ export default function CreatePost() {
                   type="file"
                   name="image"
                   accept="image/jpeg, image/png"
-                  onInput={(e) => setImageInput(e.target.files[0])}
+                  onInput={(e) => setFileInput(e.target.files[0])}
                 />
                 Select file
               </label>

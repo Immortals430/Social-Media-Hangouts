@@ -10,7 +10,7 @@ import {
 } from "../../redux/reducers/chat_reducer";
 import { memo } from "react";
 import { removeSkeleton } from "../../utility/removeSkeleton";
-
+import "./aside.scss"
 
 function AsideRight() {
   const { friends } = useSelector(friendsSelector);
@@ -36,7 +36,7 @@ function AsideRight() {
                 <div className="logo loading">
                   <img src={friend.avatarUrl} alt="logo" onLoad={removeSkeleton} />
                 </div>
-                <span className="name">{friend.username}</span>
+                <span className="name">{friend.name}</span>
                 {user._id == friend._id ||
                 !unreadMsg.includes(friend._id) ? null : (
                   <span>

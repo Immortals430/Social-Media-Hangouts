@@ -15,6 +15,7 @@ import { useEffect } from "react";
 import { fetchChatstAPI } from "../../api/api";
 import { Link } from "react-router-dom";
 import { removeSkeleton } from "../../utility/removeSkeleton";
+import "./chats.scss"
 
 export default function Chatbox() {
   const dispatch = useDispatch();
@@ -72,7 +73,7 @@ export default function Chatbox() {
           <img src={user.avatarUrl} alt="logo" onLoad={removeSkeleton} />
         </div>
         <h3 className="msg-head-name">
-          <Link to={`/profile/${user._id}`}>{user.username}</Link>
+          <Link to={`/profile/${user._id}`}>{user.name}</Link>
         </h3>
         {onlineUsers.includes(user._id) && (
           <span className="online-logo"></span>

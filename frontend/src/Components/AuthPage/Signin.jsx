@@ -4,6 +4,7 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import GoogleLoginButton from "./GoogleLoginButton";
 import { useState } from "react";
 import MoonLoader from "react-spinners/MoonLoader";
+import "./auth-page.scss"
 
 export default function Signin({ setAuthForm }) {
   const dispatch = useDispatch();
@@ -24,7 +25,7 @@ export default function Signin({ setAuthForm }) {
       <form onSubmit={callSignin}>
         <h1>Login</h1>
 
-        <input type="email" name="email" placeholder="Email" required />
+        <input type="email" name="email" placeholder="Email" required autoComplete="true"/>
         <input
           type="password"
           name="password"

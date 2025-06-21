@@ -22,7 +22,7 @@ userRouter.post("/google-login", verifyToken, (req, res, next) =>
 
 userRouter.get(
   "/get-user/:id",
-  /* jwtAuth, */ (req, res, next) => userController.getUser(req, res, next)
+   jwtAuth, (req, res, next) => userController.getUser(req, res, next)
 );
 
 userRouter.get("/get-login-status/:jwtToken", (req, res, next) =>

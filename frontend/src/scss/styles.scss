@@ -1,13 +1,4 @@
-@import "constants";
-@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
-@import "../Components/Navbar/navbar.scss";
-@import "../Components/Homepage/homepage.scss";
-@import "../Components/Aside/aside.scss";
-@import "../Components/FindFriend/find-friend.scss";
-@import "../Components/Chats/chats.scss";
-@import "../Components/Profile/profile.scss";
-@import "../Components/AuthPage/auth-page.scss";
-@import "../Components/Settings/settings.scss";
+@use "./constants.scss" as *;
 
 * {
   margin: 0;
@@ -38,13 +29,11 @@ a {
   cursor: pointer;
 }
 
-
-.propogator{
+.propogator {
   @include center;
   width: 100vw;
-  height: 100dvh;;
+  height: 100dvh;
 }
-
 
 main {
   margin-left: 280px;
@@ -56,18 +45,82 @@ main {
   height: calc(100dvh - 96px - 12px);
 }
 
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  justify-content: center;
+  gap: 20px;
+  padding: 0 20px;
+  > * {
+    margin: auto;
+    width: 100%;
+  }
+  .loading-skeleton {
+    width: 100%;
+    height: 20px;
+    margin-bottom: 20px;
+    background-color: lightgrey;
+  }
 
+  .loading-skeleton.round {
+    border-radius: 50%;
+    width: 110px;
+    margin: auto;
+    margin-bottom: 25px;
+    height: 110px;
+  }
 
-@media only screen and (max-width: 1000px){
-  main{
-    margin: 104px 0 0 0;
-    min-width: auto;
+  .card {
+    $margin-side: 3px;
+    background-color: $white;
+    border-radius: 10px;
+    width: 100%;
+    padding: 20px;
+
+    .image-container {
+      border-radius: 50%;
+      width: 50%;
+      aspect-ratio: 1 / 1;
+      margin: auto;
+      margin-bottom: 10px;
+      cursor: pointer;
+      overflow: hidden;
+    }
+    img {
+      object-fit: cover;
+      object-position: center;
+      width: 100%;
+      height: 100%;
+    }
+
+    .image-container.loading {
+      background-color: lightgrey;
+    }
+
+    .details {
+      color: black;
+      width: 100%;
+      font-size: 1rem;
+      border-radius: 4px;
+      text-align: center;
+
+      > div {
+        @include button;
+        height: auto;
+        padding: 10px;
+        width: 100%;
+        margin-bottom: 10px;
+      }
+      h3 {
+        margin-bottom: 15px;
+      }
+    }
   }
 }
 
-
-@media only screen and (max-width: 700px){
-  main{
-    // margin-bottom: 62px;
+@media only screen and (max-width: 1000px) {
+  main {
+    margin: 104px 0 0 0;
+    min-width: auto;
   }
 }

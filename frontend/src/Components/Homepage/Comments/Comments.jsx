@@ -14,6 +14,7 @@ import { commentsSelector } from "../../../redux/reducers/comment_reducer";
 import { getCommentAPI } from "../../../api/api";
 import BeatLoader from "react-spinners/BeatLoader";
 import { removeSkeleton } from "../../../utility/removeSkeleton";
+import "../homepage.scss"
 
 export default function Comments({ postId }) {
   const { loggedUser } = useSelector(userSelector);
@@ -85,7 +86,7 @@ export default function Comments({ postId }) {
         <form onSubmit={(e) => callCreateComment(e)}>
           <textarea
             rows="4"
-            placeholder={`Comment as ${loggedUser.username}`}
+            placeholder={`Comment as ${loggedUser.name}`}
             name="comment"
           ></textarea>
           <button type="submit">
@@ -106,7 +107,7 @@ export default function Comments({ postId }) {
               />
             </div>
             <div className="comment-content">
-              <h3>{comment.user.username}</h3>
+              <h3>{comment.user.name}</h3>
               <div>{comment.content}</div>
             </div>
             {comment.user._id == loggedUser._id && (

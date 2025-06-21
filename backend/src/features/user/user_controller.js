@@ -90,11 +90,11 @@ export default class UserController {
 
   async googleLogin(req, res, next) {
     const email = req.user.emailAddresses[0].value;
-    const username = req.user.names[0].displayName;
+    const name = req.user.names[0].displayName;
     try {
       let { user, token } = await this.userRepository.googleLogin(
         email,
-        username
+        name
       );
       user = user.toObject();
       delete user.password;
@@ -119,8 +119,7 @@ export default class UserController {
 
   async getFriendSuggestion(req, res, next) {
     try {
-      // const { page } = req.query;
-      let page = 1;
+      const { page } = req.query;
       const limit = 10;
       const skip = (page - 1) * limit;
       const users = await this.userRepository.getFriendSuggestion(
@@ -135,8 +134,9 @@ export default class UserController {
   }
 
   async getUser(req, res, next) {
+    const userId = req.user.id;
     try {
-      let user = await this.userRepository.getUser(req.params.id);
+      let user = await this.userRepository.getUser(req.params.id, userId);
       res.status(200).json(user);
     } catch (err) {
       next(err);

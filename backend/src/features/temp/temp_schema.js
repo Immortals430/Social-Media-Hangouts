@@ -2,7 +2,7 @@ import { Schema, model } from "mongoose";
 
 // Declare the Schema of the Mongo model
 let tempSchema = new Schema({
-  username: {
+  name: {
     type: String,
     required: true,
   },

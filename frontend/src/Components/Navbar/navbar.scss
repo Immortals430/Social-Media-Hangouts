@@ -1,3 +1,10 @@
+@use "../../scss/constants" as *;
+
+@font-face {
+  font-family: "Fredoka";
+  src: url("../../assets/fonts/fredoka.woff") format("woff");
+}
+
 nav {
   @include center;
   position: fixed;
@@ -17,7 +24,6 @@ nav * {
 
 .nav-left-container {
   font-family: "Fredoka", sans-serif;
-  font-size: $font-x-lg;
   color: $theme;
 }
 
@@ -33,16 +39,17 @@ nav * {
 }
 
 .nav-mid-container {
-  >a.active{
+  > a.active {
     color: #0055ff;
     background-color: #d0e4ff;
   }
-  .chats{
+  .chats {
     display: none;
   }
   * {
-  cursor: pointer;
-}}
+    cursor: pointer;
+  }
+}
 
 .nav-right-container {
   min-width: 130px;
@@ -51,13 +58,13 @@ nav * {
     width: 35px;
     height: 35px;
     cursor: pointer;
-    img{
+    img {
       @include icons;
       width: 35px;
       height: 35px;
     }
   }
-  .nav-profile.loading{
+  .nav-profile.loading {
     background-color: lightgrey;
   }
   > div {
@@ -73,8 +80,7 @@ nav * {
   }
 }
 
-
-.navbar-m{
+.navbar-m {
   position: fixed;
   z-index: 100;
   bottom: 0;
@@ -88,7 +94,6 @@ nav * {
   display: none;
 }
 
-
 @media only screen and (max-width: 1000px) {
   .nav-right-container {
     justify-content: flex-end;
@@ -100,38 +105,34 @@ nav * {
     }
   }
 
-  .nav-mid-container{
-    .chats{
+  .nav-mid-container {
+    .chats {
       display: flex;
     }
-    .store{
+    .store {
       display: none;
     }
   }
 }
 
-
-@media only screen and (max-width: 700px){
-  .nav-mid-container{
+@media only screen and (max-width: 700px) {
+  .nav-mid-container {
     display: none;
   }
 
   .nav-mid-container {
-
     * {
-    cursor: pointer;
-  }}
+      cursor: pointer;
+    }
+  }
 
-  .navbar-m{
+  .navbar-m {
     display: flex;
   }
 }
 
-
-@media only screen and (max-width: 400px){
-
-  .navbar-m{
+@media only screen and (max-width: 400px) {
+  .navbar-m {
     padding: 15px 0;
   }
 }
-

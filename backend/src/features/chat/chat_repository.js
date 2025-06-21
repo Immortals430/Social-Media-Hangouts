@@ -28,7 +28,7 @@ export default class ChatRepository {
 
   async updateRead(userId) {
     const chatList = await Chat.find({ users: { $in: userId } }).populate([
-      { path: "users", select: "username avatarUrl" },
+      { path: "users", select: "name avatarUrl" },
       { path: "lastMessage", select: "content" },
     ]);
 

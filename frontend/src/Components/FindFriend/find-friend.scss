@@ -1,35 +1,11 @@
+@use "../../scss/constants" as *;
+
 .friends {
   @include fontstyle;
 
   > * {
     max-width: 990px;
     margin: 30px auto 50px;
-  }
-
-  .grid{
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    justify-content: center;
-    gap: 20px;
-    padding: 0 20px;
-    >*{
-      margin:auto;
-    }
-    .loading-skeleton{
-      width: 100%;
-      height: 20px;
-      margin-bottom: 20px;
-      background-color: lightgrey;
-    }
-
-    .loading-skeleton.round{
-      border-radius: 50%;
-      width: 110px;
-      margin: auto;
-      margin-bottom: 25px;
-      height: 110px;
-
-    }
   }
 }
 
@@ -68,85 +44,13 @@
   color: $grey;
 }
 
-.user-card {
-  $margin-side: 3px;
-  background-color: $white;
-  border-radius: 10px;
-  margin: 6px $margin-side;
-  min-height: 255px;
-  width: 100%;
-
-  padding: 20px;
-  .user-image-container{
-    border-radius: 50%;
-
-    width: 50%;
-    margin: auto;
-    margin-bottom: 10px;
-    cursor: pointer;
-    height: 110px;
-  }
-
-  .user-image-container.loading{
-    background-color: lightgrey;
-  }
-
-  .user-image {
-    border-radius: 50%;
-    object-fit: cover;
-    object-position: center;
-    width: 100%;
-    height: 100%;
-  }
-
-
-  .details {
-    // position: absolute;
-    // bottom: 0;
-    color: black;
-    // background: #eaf3fab0;
-    width: 100%;
-    font-size: 1rem;
-    border-radius: 4px;
-    text-align: center;
-
-    > div {
-      @include button;
-      height: auto;
-      padding: 10px;
-      width: 100%;
-      margin-bottom: 10px;
-    }
-    h3 {
-      margin-bottom: 15px;
-    }
-    .accept-btn {
-      background-color: $theme;
-      cursor: pointer;
-      width: 230px;
-    }
-
-    .send-req-btn {
-      background-color: #10d876;
-      cursor: pointer;
-      width: 230px;
-    }
-
-    .reject-btn {
-      background-color: red;
-      cursor: pointer;
-      width: 230px;
-    }
-  }
-}
-
-.friend-req-head .user-image{
+.friend-req-head .image {
   height: 208px;
   cursor: pointer;
 }
 
-
-.friend-req-head, .friend-sugg-head {
+.friend-req-head,
+.friend-sugg-head {
   padding: 0 24px;
   color: black;
 
@@ -157,3 +61,19 @@
   }
 }
 
+.grid {
+  .accept-btn {
+    background-color: $theme;
+    cursor: pointer;
+  }
+
+  .send-req-btn {
+    background-color: #10d876;
+    cursor: pointer;
+  }
+
+  .reject-btn {
+    background-color: red;
+    cursor: pointer;
+  }
+}

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { changePassword, sendOtp, userSelector } from "../../../redux/reducers/user_reducer";
 import { useEffect, useRef, useState } from "react";
+import "../settings.scss"
 
 export default function PasswordSettings() {
   const navigate = useNavigate();

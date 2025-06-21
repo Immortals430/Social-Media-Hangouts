@@ -6,6 +6,8 @@ import { MdEventAvailable } from "react-icons/md";
 import { useSelector } from "react-redux";
 import { userSelector } from "../../redux/reducers/user_reducer";
 import { postSelector } from "../../redux/reducers/post_reducer";
+import "./profile.scss"
+
 
 export default function About({activeComp}) {
   const { profileUser } = useSelector(userSelector)

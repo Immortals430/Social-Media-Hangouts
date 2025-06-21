@@ -2,6 +2,7 @@ import { IoMdArrowRoundBack } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import { updateProfile } from "../../../redux/reducers/user_reducer";
 import { useDispatch } from "react-redux";
+import "../settings.scss"
 
 export default function AddressSettings() {
   const navigate = useNavigate();

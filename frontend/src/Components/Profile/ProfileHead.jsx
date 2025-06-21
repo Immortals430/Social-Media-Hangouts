@@ -12,6 +12,7 @@ import {
   SET_USER,
   setSeen,
 } from "../../redux/reducers/chat_reducer";
+import "./profile.scss"
 
 export default function ProfileHead({ setActiveComp }) {
   const { loggedUser, profileUser } = useSelector(userSelector);
@@ -27,6 +28,7 @@ export default function ProfileHead({ setActiveComp }) {
     dispatch(REMOVE_UNREAD(profileUser._id));
     dispatch(setSeen(profileUser._id));
   }
+  console.log("profileUser", profileUser)
 
   function profileBtnOptions(profileUser) {
     if (Object.keys(profileUser).length == 0) {
@@ -147,7 +149,7 @@ export default function ProfileHead({ setActiveComp }) {
               ) : null}
             </div>
             <div className="profilename">
-              <h4>{profileUser.username}</h4>
+              <h4>{profileUser.name}</h4>
             </div>
             <div className="connects-container">
               {loggedUser._id == profileUser._id

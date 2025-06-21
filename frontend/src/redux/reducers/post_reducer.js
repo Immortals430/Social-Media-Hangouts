@@ -3,7 +3,7 @@ import { deletePostAPI, toggleLikeAPI } from "../../api/api";
 
 const initialState = {
   posts: [],
-  postPage: 1,
+  postPage: 2,
   dontFetchPost: false,
 };
 

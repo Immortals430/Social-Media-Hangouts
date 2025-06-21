@@ -9,6 +9,7 @@ import { TfiAngleRight } from "react-icons/tfi";
 import { logout } from "../../redux/reducers/user_reducer";
 import { useDispatch } from "react-redux";
 import { MdOutlineFeedback } from "react-icons/md";
+import "./settings.scss"
 
 export default function Settings() {
   const dispatch = useDispatch();

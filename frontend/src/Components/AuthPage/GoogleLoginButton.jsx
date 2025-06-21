@@ -4,12 +4,14 @@ import { useDispatch } from "react-redux";
 import { googleLogin } from "../../redux/reducers/user_reducer";
 import { memo, useState } from "react";
 import MoonLoader from "react-spinners/MoonLoader";
+import "./auth-page.scss"
 
 function GoogleLoginButton() {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState();
 
   const login = useGoogleLogin({
+
     onError: () => setLoading(false),
     onSuccess: async ({ access_token }) => {
       setLoading(true);

@@ -1,5 +1,6 @@
 import { useEffect } from "react"
 import { useRef } from "react"
+import "../homepage.scss"
 
 export default function Shorts() {
 

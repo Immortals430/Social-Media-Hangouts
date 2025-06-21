@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import Signup from "./Signup";
 import Signin from "./Signin";
 import ForgortPassword from "./ForgortPassword";
+import "./auth-page.scss"
+
 
 function AuthPage() {
   const [authForm, setAuthForm] = useState("login");

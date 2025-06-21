@@ -22,6 +22,7 @@ import { useEffect, useState } from "react";
 import { getPostAPI } from "../../api/api";
 import GridLoader from "react-spinners/GridLoader";
 import ScaleLoader from "react-spinners/ScaleLoader";
+import "./profile.scss"
 
 export default function Timeline() {
   const { userTimeline, loggedUser } = useSelector(userSelector);
@@ -111,7 +112,7 @@ export default function Timeline() {
               />
             </div>
             <div className="postowner-name">
-              <h4>{post.uploader.username}</h4>
+              <h4>{post.uploader.name}</h4>
               <div>2 hour ago</div>
             </div>
             <div>
@@ -162,8 +163,27 @@ export default function Timeline() {
         </div>
       ))}
       {loading && (
-        <div className="post-container loading">
-          <ScaleLoader color="#0055ff" />
+        <div className={`post-container`}>
+          <div className="post-header">
+            <div className={"loading postowner-logo"}></div>
+          </div>
+
+          <div className={`post-image loading`}></div>
+
+          <div className="post-interacts">
+            <div>
+              <FaRegHeart size={16} color="red" className="center" />
+              &nbsp; Like
+            </div>
+            <div>
+              <FaRegComment size={16} color="#12d877" />
+              &nbsp; Comment
+            </div>
+            <div>
+              <IoIosShareAlt size={16} color="#0055ff" />
+              &nbsp; Share
+            </div>
+          </div>
         </div>
       )}
     </section>

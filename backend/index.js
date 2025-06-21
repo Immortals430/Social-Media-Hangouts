@@ -12,6 +12,7 @@ import cookieParser from "cookie-parser";
 import { jwtAuth } from "./src/middlewares/jwt_middleware.js";
 import { chatRouter } from "./src/features/chat/chat_route.js";
 import "./src/config/firebase.js";
+import groupRouter from "./src/features/groups/groups_route.js";
 const PORT = process.env.PORT || 8000;
 const app = express();
 
@@ -35,6 +36,8 @@ app.use("/api/v1/friendship", jwtAuth, friendshipRouter);
 app.use("/api/v1/comment", jwtAuth, commentRouter);
 app.use("/api/v1/like", jwtAuth, likeRouter);
 app.use("/api/v1/chats", jwtAuth, chatRouter);
+app.use("/api/v1/groups", jwtAuth, groupRouter);
+
 
 
 app.use(errorhandler)

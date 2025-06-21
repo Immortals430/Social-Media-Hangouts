@@ -6,6 +6,9 @@ const initialState = {
   friends: [],
   friendReqsRec: [],
   friendSuggestions: [],
+  friendPage: 2,
+  dontFetch: false,
+  initialLoadFindFriend: true,
 };
 
 const friendSlice = createSlice({
@@ -16,25 +19,45 @@ const friendSlice = createSlice({
       state.friends = action.payload;
     },
     ADD_NEW_FRIEND: (state, action) => {
-      state.friends.push(action.payload)
+      state.friends.push(action.payload);
     },
     DELETE_FRIEND: (state, action) => {
-      const index = state.friends.findIndex(({friend}) => friend._id === action.payload)
-      state.friends.splice(index, 1)
+      const index = state.friends.findIndex(
+        ({ friend }) => friend._id === action.payload
+      );
+      state.friends.splice(index, 1);
     },
     SET_FRIENDS_REQ: (state, action) => {
       state.friendReqsRec = action.payload;
     },
     DELETE_FRIEND_REQ_REC: (state, action) => {
-      const index = state.friendReqsRec.findIndex(obj => obj.friend._id === action.payload)
-      state.friendReqsRec.splice(index, 1)
+      const index = state.friendReqsRec.findIndex(
+        (obj) => obj.friend._id === action.payload
+      );
+      state.friendReqsRec.splice(index, 1);
     },
     SET_FRIENDS_SUGG: (state, action) => {
       state.friendSuggestions = action.payload;
     },
+
+    LOAD_FRIENDS_SUGG: (state, action) => {
+      state.friendSuggestions = [...state.friendSuggestions, ...action.payload];
+    },
     UPDATE_FRIENDS_SUGG: (state, action) => {
-      const index = state.friendSuggestions.findIndex((user) => user._id === action.payload)
-      state.friendSuggestions[index].reqSent = !state.friendSuggestions[index].reqSent
+      const index = state.friendSuggestions.findIndex(
+        (user) => user._id === action.payload
+      );
+      state.friendSuggestions[index].reqSent =
+        !state.friendSuggestions[index].reqSent;
+    },
+    INCREASE_FRIEND_PAGE: (state) => {
+      state.friendPage = state.friendPage + 1;
+    },
+    DONT_FETCH_FRIEND_SUGG: (state) => {
+      state.dontFetch = true;
+    },
+    SET_INITIAL_LOAD_FIND_FRIEND: (state) => {
+      state.initialLoadFindFriend = false;
     },
   },
 });
@@ -42,13 +65,13 @@ const friendSlice = createSlice({
 // toggle request
 export const toggleFrndReq = createAsyncThunk(
   "friend/toggleFrndReq",
-  async (friendId, {dispatch, getState}) => {
+  async (friendId, { dispatch, getState }) => {
     try {
-      const profileUser = {...getState().userReducer.profileUser}
+      const profileUser = { ...getState().userReducer.profileUser };
       const { data } = await toggleFrndReqAPI(friendId);
-      if(data === "friend request sent") profileUser.reqSent = true
-      else profileUser.reqSent = false
-      dispatch(SET_USER_PROFILE(profileUser))
+      if (data === "friend request sent") profileUser.reqSent = true;
+      else profileUser.reqSent = false;
+      dispatch(SET_USER_PROFILE(profileUser));
       dispatch(UPDATE_FRIENDS_SUGG(friendId));
     } catch (err) {
       console.log(err);
@@ -59,14 +82,13 @@ export const toggleFrndReq = createAsyncThunk(
 // respond to request
 export const respondReq = createAsyncThunk(
   "friend/respondReq",
-  async ({ friendId, respond}, { dispatch, getState }) => {
+  async ({ friendId, respond }, { dispatch, getState }) => {
     try {
       const { data } = await respondReqAPI(friendId, respond);
-      if(data.message === "request accepted"){
-        dispatch(ADD_NEW_FRIEND(data.friend))
+      if (data.message === "request accepted") {
+        dispatch(ADD_NEW_FRIEND(data.friend));
       }
-      dispatch(DELETE_FRIEND_REQ_REC(friendId))
-
+      dispatch(DELETE_FRIEND_REQ_REC(friendId));
     } catch (err) {
       console.log(err);
     }
@@ -78,19 +100,13 @@ export const unfriend = createAsyncThunk(
   "friend/unfriend",
   async (friendId, { dispatch, getState }) => {
     try {
-      dispatch(DELETE_FRIEND(friendId))
+      dispatch(DELETE_FRIEND(friendId));
       await unfriendAPI(friendId);
     } catch (err) {
       console.log(err);
     }
   }
 );
-
-
-
-
-
-
 
 export const friendsReducer = friendSlice.reducer;
 export const {
@@ -100,7 +116,10 @@ export const {
   SET_FRIENDS_REQ,
   DELETE_FRIEND_REQ_REC,
   SET_FRIENDS_SUGG,
+  LOAD_FRIENDS_SUGG,
   UPDATE_FRIENDS_SUGG,
-
+  INCREASE_FRIEND_PAGE,
+  DONT_FETCH_FRIEND_SUGG,
+  SET_INITIAL_LOAD_FIND_FRIEND,
 } = friendSlice.actions;
 export const friendsSelector = (state) => state.friendsReducer;

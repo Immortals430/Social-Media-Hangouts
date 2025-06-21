@@ -9,7 +9,7 @@ import { logout, userSelector } from "../../redux/reducers/user_reducer";
 import { IoLogOutSharp } from "react-icons/io5";
 import { FiSettings } from "react-icons/fi";
 import { removeSkeleton } from "../../utility/removeSkeleton";
-
+import "./aside.scss"
 
 export default function AsideLeft({ mobileAside, setMobileAside }) {
   const { loggedUser } = useSelector(userSelector);
@@ -27,7 +27,7 @@ export default function AsideLeft({ mobileAside, setMobileAside }) {
           <span className="profile loading">
             <img src={loggedUser.avatarUrl} onLoad={removeSkeleton} alt="logo" />
           </span>
-          <span>{loggedUser.username}</span>
+          <span>{loggedUser.name}</span>
         </Link>
 
 
@@ -45,18 +45,18 @@ export default function AsideLeft({ mobileAside, setMobileAside }) {
           <span>Find Friends</span>
         </Link>
 
-        <div>
-          <span className="groups">
+        <Link to="/groups" onClick={() => setMobileAside(false)}>
+          <span className="groups-btn">
             <HiOutlineUserGroup size={20} />
           </span>
           <span>Groups</span>
-        </div>
-        <div>
-          <span className="store">
+        </Link>
+        <Link to="/store" onClick={() => setMobileAside(false)}>
+          <span className="store-btn">
             <MdOutlineLocalGroceryStore size={20} />
           </span>
           <span>Nearby Store</span>
-        </div>
+        </Link>
       </section>
       <section className="aside-author-sec">
         <div className="aside-sec-header">Founder Profiles</div>

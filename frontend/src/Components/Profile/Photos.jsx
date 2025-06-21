@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { userSelector } from "../../redux/reducers/user_reducer";
+import "./profile.scss"
 
 export default function Photos({activeComp}) {
   const { userTimeline } = useSelector(userSelector);

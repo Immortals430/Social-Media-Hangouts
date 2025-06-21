@@ -9,6 +9,7 @@ import {
   getFriendsAPI,
   getFriendSuggestionAPI,
   getLoggedUser,
+  getPostAPI,
 } from "./api/api";
 import Navbar from "./Components/Navbar/Navbar";
 import AsideLeft from "./Components/Aside/AsideLeft";
@@ -17,11 +18,18 @@ import {
   SET_FRIENDS_REQ,
   SET_FRIENDS_SUGG,
 } from "./redux/reducers/friend_reducer";
-import { ADD_CHAT, chatSelector, SET_ONLINE_USERS, SET_UNREAD, UPDATE_UNREAD } from "./redux/reducers/chat_reducer";
+import {
+  ADD_CHAT,
+  chatSelector,
+  SET_ONLINE_USERS,
+  SET_UNREAD,
+  UPDATE_UNREAD,
+} from "./redux/reducers/chat_reducer";
 import Chatbox from "./Components/Chats/Chatbox";
 import Navbar_M from "./Components/Navbar/Navbar_M";
 import Aside_M from "./Components/Aside/Aside_M";
-import { socket } from "./config/socket";
+import { LOAD_POST } from "./redux/reducers/post_reducer";
+import { connectSocket, socket } from "./config/socket";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -50,37 +58,37 @@ function App() {
   useEffect(() => {
     async function setupUserData() {
       if (loggedUser._id) {
-        const friends = await getFriendsAPI();
-        dispatch(SET_FRIENDS(friends.data));
-        const frndReq = await getFriendReqAPI();
-        dispatch(SET_FRIENDS_REQ(frndReq.data));
-        const users = await getFriendSuggestionAPI();
-        dispatch(SET_FRIENDS_SUGG(users.data));
+        const post = await getPostAPI(1);
+        dispatch(LOAD_POST(post.data));    
+ 
+
       }
     }
     setupUserData();
   }, [loggedUser]);
 
-    useEffect(() => {
-      if (loggedUser._id) {
-        socket.emit("connected", loggedUser._id);
-        socket.on("online-users", (onlineUsers) => {
-          dispatch(SET_ONLINE_USERS(onlineUsers));
-        });
-        socket.on("unread-msgs", ({ unReadMsgs }) => {
-          dispatch(SET_UNREAD(unReadMsgs));
-        });
-        socket.on("new-msg", (msg) => {
-          dispatch(ADD_CHAT([msg]));
-          if (profileUser._id != msg.sender) dispatch(UPDATE_UNREAD(msg.sender));
-        });
-        return () => {
-          socket.off("online-users");
-          socket.off("unread-msgs");
-          socket.off("new-msg");
-        };
-      }
-    }, [loggedUser._id]);
+  useEffect(() => {
+  
+    if (loggedUser._id) {
+        connectSocket()
+      socket.emit("connected", loggedUser._id);
+      socket.on("online-users", (onlineUsers) => {
+        dispatch(SET_ONLINE_USERS(onlineUsers));
+      });
+      socket.on("unread-msgs", ({ unReadMsgs }) => {
+        dispatch(SET_UNREAD(unReadMsgs));
+      });
+      socket.on("new-msg", (msg) => {
+        dispatch(ADD_CHAT([msg]));
+        if (profileUser._id != msg.sender) dispatch(UPDATE_UNREAD(msg.sender));
+      });
+      return () => {
+        socket.off("online-users");
+        socket.off("unread-msgs");
+        socket.off("new-msg");
+      };
+    }
+  }, [loggedUser._id]);
 
   return (
     <>

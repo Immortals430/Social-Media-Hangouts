@@ -6,6 +6,7 @@ import { sendOtp } from "../../redux/reducers/user_reducer";
 import { useEffect } from "react";
 import { changePassword } from "../../redux/reducers/user_reducer";
 import MoonLoader from "react-spinners/MoonLoader";
+import "./auth-page.scss"
 
 export default function ForgortPassword({ setAuthForm }) {
   const emailRef = useRef();

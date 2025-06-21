@@ -3,7 +3,7 @@ import { FiHome, FiUsers } from "react-icons/fi";
 import { HiOutlineUserGroup } from "react-icons/hi2";
 import { MdOutlineLocalGroceryStore } from "react-icons/md";
 import { Link } from "react-router-dom";
-
+import "./navbar.scss"
 
 export default function Navbar_M() {
   return (
@@ -18,12 +18,12 @@ export default function Navbar_M() {
           <FiUsers size={28} />
         </div>
       </Link>
-      <Link>
+      <Link to="/store">
         <div>
           <MdOutlineLocalGroceryStore size={28} />
         </div>
       </Link>
-      <Link>
+      <Link to="/groups">
         <div>
           <HiOutlineUserGroup size={28} />
         </div>

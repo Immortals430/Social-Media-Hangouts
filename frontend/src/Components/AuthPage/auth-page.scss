@@ -1,3 +1,7 @@
+@use "../../scss/constants" as *;
+
+
+
 .auth-nav {
   display: flex;
   background-color: transparent;
@@ -99,7 +103,7 @@
       align-items: center;
       justify-content: center;
       gap: 10px;
-      background-color: #dc4c38;
+      background-color: #A22E1A;
       padding: 13px;
     }
 

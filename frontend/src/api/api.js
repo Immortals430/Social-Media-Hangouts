@@ -56,8 +56,8 @@ export const getFriendReqAPI = (id) =>
   API.get("/friendship/get-friend-req-list");
 
 
-export const getFriendSuggestionAPI = () =>
-  API.get("/user/get-friend-suggestion");
+export const getFriendSuggestionAPI = (page = 1) =>
+  API.get(`/user/get-friend-suggestion?page=${page}`);
 
 export const fetchChatstAPI = (friendId, page) =>
   API.get(`/chats/get-chats?friendId=${friendId}&page=${page}`);
@@ -74,3 +74,7 @@ export const deleteCommentAPI = (commentId) =>
   API.delete(`/comment/delete/${commentId}`);
 
 export const getChatListAPI = () => API.get("/chats/get-chat-list")
+
+export const getGroupsAPI = (page = 1) => API.get(`/groups/get-groups/${page}`)
+
+export const toggleToAddRemoveFromGroupAPI = (groupId) => API.post(`/groups/toggle/${groupId}`)

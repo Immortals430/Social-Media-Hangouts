@@ -1,7 +1,7 @@
 import { lazy, StrictMode, Suspense } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App.jsx";
-import "./scss/styles.scss";
+
 import { Provider } from "react-redux";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Homepage from "./Components/Homepage/Homepage.jsx";
@@ -12,6 +12,9 @@ import ProfileLazy from "./Components/Profile/ProfileLazy.jsx";
 import ChatLazy from "./Components/Chats/ChatLazy.jsx";
 import SettingLazy from "./Components/Settings/SettingLazy.jsx";
 import PropagateLoader from "react-spinners/PropagateLoader.js";
+import StoreLazy from "./Components/Store/StoreLazy.jsx";
+import GroupsLazy from "./Components/Groups/GroupsLazy.jsx";
+
 
 const AuthPage = lazy(() => import("./Components/AuthPage/AuthPage.jsx"));
 const FindFriend = lazy(() => import("./Components/FindFriend/FindFriend.jsx"));
@@ -27,6 +30,10 @@ const AddressSettings = lazy(() =>
 const PasswordSettings = lazy(() =>
   import("./Components/Settings/SubSettings/PasswordSettings.jsx")
 );
+const Store = lazy(() => import("./Components/Store/Store.jsx"));
+const Groups = lazy(() => import("./Components/Groups/Groups.jsx"))
+
+import "./scss/styles.scss";
 
 const routes = createBrowserRouter([
   {
@@ -36,26 +43,75 @@ const routes = createBrowserRouter([
       { index: true, element: <Homepage /> },
       {
         path: "/find-friend",
-        element: <FindFriendLazy component={<FindFriend />} />,
+        element: (
+          <Suspense fallback={<FindFriendLazy />}>
+            <FindFriend />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/store",
+        element: (
+          <Suspense fallback={<StoreLazy />}>
+            <Store />
+          </Suspense>
+        ),
       },
       {
         path: "/profile/:id",
-        element: <ProfileLazy component={<Profile />} />,
+        element: (
+          <Suspense fallback={<ProfileLazy />}>
+            <Profile />
+          </Suspense>
+        ),
       },
-      { path: "/chatlist", element: <ChatLazy component={<Chat />} /> },
+      {
+        path: "/chatlist",
+        element: (
+          <Suspense fallback={<ChatLazy />}>
+            <Chat />
+          </Suspense>
+        ),
+      },
 
-      { path: "/settings", element: <SettingLazy component={<Settings />} /> },
+      {
+        path: "/settings",
+        element: (
+          <Suspense fallback={<SettingLazy />}>
+            <Settings />
+          </Suspense>
+        ),
+      },
       {
         path: "/settings/account",
-        element: <SettingLazy component={<AccountSettings />} />,
+        element: (
+          <Suspense fallback={<SettingLazy />}>
+            <AccountSettings />
+          </Suspense>
+        ),
       },
       {
         path: "/settings/address",
-        element: <SettingLazy component={<AddressSettings />} />,
+        element: (
+          <Suspense fallback={<SettingLazy />}>
+            <AddressSettings />
+          </Suspense>
+        ),
       },
       {
         path: "/settings/password",
-        element: <SettingLazy component={<PasswordSettings />} />,
+        element: (
+          <Suspense fallback={<SettingLazy />}>
+            <PasswordSettings />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/groups", element: (
+          <Suspense fallback={<GroupsLazy />}>
+            <Groups />
+          </Suspense>
+        )
       },
       { path: "*", element: <ErrorPage /> },
     ],

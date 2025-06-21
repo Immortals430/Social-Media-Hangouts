@@ -10,6 +10,8 @@ import { userSelector } from "../../redux/reducers/user_reducer";
 import Hamburger from "hamburger-react";
 import { removeSkeleton } from "../../utility/removeSkeleton";
 
+import "./navbar.scss"
+
 
 export default function Navbar({ mobileAside, setMobileAside }) {
   const { loggedUser } = useSelector(userSelector);
@@ -31,7 +33,7 @@ export default function Navbar({ mobileAside, setMobileAside }) {
         >
           <FiUsers size={25} />
         </Link>
-        <Link className="store">
+        <Link className="store" to="/store">
           <MdOutlineLocalGroceryStore size={25} />
         </Link>
         <Link
@@ -40,7 +42,7 @@ export default function Navbar({ mobileAside, setMobileAside }) {
         >
           <FaRegMessage size={25} />
         </Link>
-        <Link>
+        <Link to={"/groups"}>
           <HiOutlineUserGroup size={25} />
         </Link>
       </div>

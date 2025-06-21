@@ -1,0 +1,19 @@
+@use "../../scss/constants.scss" as *;
+
+.groups {
+  @include fontstyle;
+  > * {
+    max-width: 990px;
+    margin: 30px auto 50px;
+  }
+  .groups-head {
+    padding: 0 24px;
+    color: black;
+
+    h2 {
+      flex: 1;
+      font-size: 1.2rem;
+      height: 45px;
+    }
+  }
+}

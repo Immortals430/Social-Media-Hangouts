@@ -2,7 +2,7 @@ import { model, Schema } from "mongoose";
 
 let userSchema = new Schema(
   {
-    username: {
+    name: {
       type: String,
       required: true,
     },
@@ -51,16 +51,6 @@ let userSchema = new Schema(
       type: Date,
       select: false,
     },
-
-    //   chats: [
-    //     {
-    //       recepient: String,
-    //       chatId: {
-    //         type: Schema.Types.ObjectId,
-    //         ref: "chats",
-    //       },
-    //     },
-    //   ],
   },
   { timestamps: true }
 );

@@ -20,7 +20,7 @@ export default class UserRepository {
     if (!tempUserData) {
       tempUserData = await Temp.create(userData);
     } else {
-      tempUserData.username = userData.username;
+      tempUserData.name = userData.name;
       tempUserData.email = userData.email;
       tempUserData.password = userData.password;
       await tempUserData.save();
@@ -34,7 +34,7 @@ export default class UserRepository {
       throw new ApplicationError("confirmation link expired", 410);
     }
     await User.create({
-      username: tempUser.username,
+      name: tempUser.name,
       email: tempUser.email,
       password: tempUser.password,
     });
@@ -51,11 +51,11 @@ export default class UserRepository {
     return { user, token };
   }
 
-  async googleLogin(email, username) {
+  async googleLogin(email, name) {
     let user = await User.findOne({ email });
     if (!user) {
       user = await User.create({
-        username,
+        name,
         email,
         password: randomBytes(20).toString("hex"),
       });
@@ -99,10 +99,10 @@ export default class UserRepository {
     return users;
   }
 
-  async updateUser({ username, status, phone, location, hobbies }, id, file) {
+  async updateUser({ name, status, phone, location, hobbies }, id, file) {
     const user = await User.findById(id);
 
-    if (username) user.username = username;
+    if (name) user.name = name;
     if (status) user.status = status;
     if (phone) user.phone = phone;
     if (location) user.location = location;
@@ -153,9 +153,9 @@ export default class UserRepository {
     }
   }
 
-  async getUser(id) {
+  async getUser(id, userId) {
     let user = await User.findOne({ _id: id });
-    const friend = await Friendship.findOne({ friend: id, status: "pending" });
+    const friend = await Friendship.findOne({ friend: id, user: userId, status: "pending" });
     if (friend) {
       user = user.toObject();
       user.reqSent = true;

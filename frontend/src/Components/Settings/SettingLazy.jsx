@@ -1,9 +1,9 @@
 import React, { Suspense } from "react";
+import "./settings.scss"
 
-export default function SettingLazy({ component }) {
+export default function SettingLazy() {
   return (
-    <Suspense
-      fallback={
+
         <main className="settings">
           <div>
             <h1>Settings</h1>
@@ -25,9 +25,6 @@ export default function SettingLazy({ component }) {
             </section>
           </div>
         </main>
-      }
-    >
-      {component}
-    </Suspense>
+
   );
 }

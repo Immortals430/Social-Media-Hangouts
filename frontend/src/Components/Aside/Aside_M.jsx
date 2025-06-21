@@ -12,7 +12,7 @@ import { FaRegBell } from "react-icons/fa";
 import { FaRegMessage } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { SiYoutubeshorts } from "react-icons/si";
-
+import "./aside.scss"
 
 export default function Aside_M({ mobileAside, setMobileAside }) {
   const { loggedUser } = useSelector(userSelector);
@@ -55,17 +55,17 @@ export default function Aside_M({ mobileAside, setMobileAside }) {
             <span>Find Friend</span>
           </div>
         </Link>
-        <Link>
+        <Link to="/store" onClick={() => setMobileAside(false)}>
           <div>
-            <span className="store">
+            <span className="store-btn">
               <MdOutlineLocalGroceryStore size={20} />
             </span>
             <span>Store</span>
           </div>
         </Link>
-        <Link>
+        <Link to="/groups" onClick={() => setMobileAside(false)}>
           <div>
-            <span className="groups">
+            <span className="groups-btn">
               <HiOutlineUserGroup size={20} />
             </span>
             <span>Groups</span>

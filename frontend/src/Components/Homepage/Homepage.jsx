@@ -11,6 +11,8 @@ import { getPostAPI } from "../../api/api";
 import Header from "./Header.jsx/Header";
 import Posts from "./Posts/Posts";
 import AsideRight from "../Aside/Contacts";
+import "./homepage.scss"
+
 
 export default function Homepage() {
   const dispatch = useDispatch();

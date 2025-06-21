@@ -1,0 +1,29 @@
+@use "../../scss/constants" as *;
+
+.store {
+  @include fontstyle;
+  > section {
+    margin-top: 30px;
+  }
+}
+
+.store-grid {
+  .card {
+    padding: 0;
+    padding-bottom: 20px;
+  }
+
+  .product-card {
+    cursor: pointer;
+  }
+
+
+  .product-image-container {
+    aspect-ratio: 3 / 4;
+    margin-bottom: 1rem;
+  }
+
+  .product-image-container.loading{
+    background-color: lightgray;
+  }
+}

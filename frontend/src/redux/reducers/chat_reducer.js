@@ -7,6 +7,7 @@ const initialState = {
   chats: [],
   unreadMsg: [],
   onlineUsers: [],
+  initialLoadChat: true
 };
 const chatSlice = createSlice({
   name: "chat",
@@ -40,7 +41,10 @@ const chatSlice = createSlice({
     },
     SET_CHATLIST: (state, action) => {
       state.chatList = action.payload
-    }
+    },
+    SET_INITIAL_LOAD_CHAT: (state) => {
+      state.initialLoadChat = false;
+    },
   },
 });
 
@@ -64,7 +68,8 @@ export const {
   RESET_CHAT,
   SET_ONLINE_USERS,
   SET_CHAT_HISTORY,
-  SET_CHATLIST
+  SET_CHATLIST,
+  SET_INITIAL_LOAD_CHAT
 } = chatSlice.actions;
 export const chatReducer = chatSlice.reducer;
 export const chatSelector = (state) => state.chatReducer;

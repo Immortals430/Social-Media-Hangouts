@@ -12,18 +12,17 @@ import {
 import { userSelector } from "../../../redux/reducers/user_reducer";
 import { Suspense, useState } from "react";
 import { lazy } from "react";
-import ScaleLoader from "react-spinners/ScaleLoader";
 import BeatLoader from "react-spinners/BeatLoader";
 import { removeSkeleton } from "../../../utility/removeSkeleton";
 
 const Comments = lazy(() => import("../Comments/Comments"));
+import "../homepage.scss"
 
 function Posts({ loading }) {
   const { posts } = useSelector(postSelector);
   const dispatch = useDispatch();
   const { loggedUser } = useSelector(userSelector);
   const [viewComment, setViewComment] = useState("");
-
 
   async function callLike(postId) {
     const { payload } = await dispatch(toggleLike(postId));
@@ -35,17 +34,15 @@ function Posts({ loading }) {
       {posts.map((post) => (
         <div className={`post-container`} key={post._id}>
           <div className="post-header">
-            <div
-              className={"loading postowner-logo"}
-            >
+            <div className={"loading postowner-logo"}>
               <img
                 src={post.uploader.avatarUrl}
                 onLoad={removeSkeleton}
-                alt="logo"
+                alt=""
               />
             </div>
             <div className="postowner-name">
-              <h4>{post.uploader.username}</h4>
+              <h4>{post.uploader.name}</h4>
               <div>NA hour ago</div>
             </div>
             <div>
@@ -69,7 +66,7 @@ function Posts({ loading }) {
 
           {post.url && (
             <div className={`post-image loading`}>
-              <img src={post.url} onLoad={removeSkeleton} alt="image" />
+              <img src={post.url} onLoad={removeSkeleton} alt="" />
             </div>
           )}
 
@@ -105,9 +102,29 @@ function Posts({ loading }) {
         </div>
       ))}
 
+      {/* loading skeleton */}
       {loading && (
-        <div className="post-container loader">
-          <ScaleLoader color="#0055ff" />
+        <div className={`post-container`}>
+          <div className="post-header">
+            <div className={"loading postowner-logo"}></div>
+          </div>
+
+          <div className={`post-image loading`}></div>
+
+          <div className="post-interacts">
+            <div>
+              <FaRegHeart size={16} color="red" className="center" />
+              &nbsp; Like
+            </div>
+            <div>
+              <FaRegComment size={16} color="#12d877" />
+              &nbsp; Comment
+            </div>
+            <div>
+              <IoIosShareAlt size={16} color="#0055ff" />
+              &nbsp; Share
+            </div>
+          </div>
         </div>
       )}
     </section>

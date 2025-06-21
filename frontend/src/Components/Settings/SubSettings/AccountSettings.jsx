@@ -2,6 +2,7 @@ import { IoMdArrowRoundBack } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import { updateProfile } from "../../../redux/reducers/user_reducer";
 import { useDispatch } from "react-redux";
+import "../settings.scss"
 
 export default function AccountSettings() {
   const navigate = useNavigate();
@@ -10,7 +11,7 @@ export default function AccountSettings() {
   function callupdateProfile(e){
     e.preventDefault()
     const accountDetails = {
-      username: e.target.username.value,
+      name: e.target.username.value,
       status: e.target.status.value,
       phone: e.target.phone.value,
       hobbies: e.target.hobbies.value,

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { signup } from "../../redux/reducers/user_reducer";
 import MoonLoader from "react-spinners/MoonLoader";
+import "./auth-page.scss"
 
 
 export default function Signup({ setAuthForm }) {
@@ -30,7 +31,7 @@ export default function Signup({ setAuthForm }) {
     setLoading(true);
     if (!passwordMatch && !isValidPassword) return;
     const formData = {
-      username: e.target.username.value,
+      name: e.target.username.value,
       email: e.target.email.value,
       password: e.target.password.value,
       confirmPassword: e.target.confirmPassword.value,

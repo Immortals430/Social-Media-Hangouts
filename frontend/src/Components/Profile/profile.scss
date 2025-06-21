@@ -1,3 +1,5 @@
+@use "../../scss/constants" as *;
+
 .profile-main {
   @include fontstyle;
   height: calc(100vh - 96px - 12px);

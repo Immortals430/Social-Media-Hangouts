@@ -9,6 +9,7 @@ import { useParams } from "react-router-dom";
 import CreatePost from "../Homepage/Header.jsx/CreatePost";
 import Timeline from "./Timeline";
 import { getPostAPI } from "../../api/api";
+import "./profile.scss"
 
 
 

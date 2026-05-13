@@ -22,13 +22,13 @@ const postSlice = createSlice({
     },
     UPDATE_POST: (state, action) => {
       const index = state.posts.findIndex(
-        (post) => post._id === action.payload.uniqueId
+        (post) => post._id === action.payload._id,
       );
-      state.posts[index] = action.payload.data;
+      state.posts[index] = action.payload;
     },
     DELETE_POST: (state, action) => {
       const index = state.posts.findIndex(
-        (post) => post._id === action.payload
+        (post) => post._id === action.payload,
       );
       state.posts.splice(index, 1);
     },
@@ -51,7 +51,7 @@ export const toggleLike = createAsyncThunk(
     } catch (err) {
       console.log(err);
     }
-  }
+  },
 );
 
 // delete post
@@ -65,7 +65,7 @@ export const deletePost = createAsyncThunk(
     } catch (err) {
       console.log(err);
     }
-  }
+  },
 );
 
 export const postReducer = postSlice.reducer;

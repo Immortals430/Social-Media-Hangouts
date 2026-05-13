@@ -30,7 +30,7 @@ export default class UserController {
         ...req.body,
         password,
       });
-
+      
       axios.post(`http://${process.env.MAIL_URL}/send-account-creation-link`, {
         email,
         userid,
@@ -167,7 +167,7 @@ export default class UserController {
         throw new ApplicationError("User not found", 404);
       }
       await this.userRepository.updateOtp(email, otp);
-
+      console.log(`https://${process.env.MAIL_URL}/send-reset-link`);
       await axios.post(`https://${process.env.MAIL_URL}/send-reset-link`, {
         email,
         otp,
